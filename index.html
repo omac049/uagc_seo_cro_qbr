@@ -101,23 +101,36 @@ if (typeof Chart === 'undefined') {
 </script>
 
 <style>
-/* Professional Corporate Styling */
+/* UAGC Official Brand Styling */
 :root {
-    --uagc-primary: #003366;
-    --uagc-primary-light: #2c5ba0;
-    --uagc-secondary: #6c757d;
-    --uagc-success: #28a745;
-    --uagc-success-light: #34ce57;
-    --uagc-danger: #dc3545;
-    --uagc-warning: #ffc107;
-    --uagc-info: #17a2b8;
-    --uagc-light: #f8f9fa;
-    --uagc-dark: #343a40;
+    /* Official UAGC Brand Colors */
+    --arizona-blue: #0C234B;
+    --arizona-red: #AB0520;
+    --highlight-orange: #EF9600;
+    --highlight-sky: #81D3EB;
+    --highlight-blue: #0076A8;
+    --highlight-purple: #621244;
+    --light-gray: #D0D0CE;
+    --dark-gray: #53565A;
+    --river: #007D8A;
+    --silver: #98A4AE;
+    --yellow: #F9E17D;
     
-    /* Professional Color Palette */
-    --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --card-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
+    /* Primary Brand Implementation */
+    --uagc-primary: var(--arizona-blue);
+    --uagc-secondary: var(--arizona-red);
+    --uagc-highlight: var(--highlight-orange);
+    --uagc-success: #28a745;
+    --uagc-danger: var(--arizona-red);
+    --uagc-warning: var(--highlight-orange);
+    --uagc-info: var(--highlight-sky);
+    --uagc-light: #f8f9fa;
+    --uagc-dark: var(--arizona-blue);
+    
+    /* UAGC Website Styling */
+    --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    --card-shadow: 0 4px 12px rgba(12, 35, 75, 0.08);
+    --card-shadow-hover: 0 8px 25px rgba(12, 35, 75, 0.12);
     
     /* Typography */
     --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
@@ -134,7 +147,7 @@ body {
 
 /* Executive Hero Section */
 .executive-hero {
-    background: linear-gradient(135deg, var(--uagc-primary) 0%, var(--uagc-primary-light) 100%);
+    background: linear-gradient(135deg, var(--arizona-blue) 0%, var(--arizona-red) 100%);
     color: white;
     min-height: 100vh;
     display: flex;
@@ -153,6 +166,23 @@ body {
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" fill="rgba(255,255,255,0.05)"><polygon points="0,0 1000,0 1000,150 0,300"/></svg>');
     background-size: cover;
     z-index: 1;
+}
+
+/* UAGC Logo Styling */
+.uagc-logo {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 25px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(12, 35, 75, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.uagc-logo img {
+    height: 60px;
+    width: auto;
 }
 
 .hero-content {
@@ -177,7 +207,7 @@ body {
 }
 
 .slide-header {
-    background: linear-gradient(135deg, var(--uagc-primary) 0%, var(--uagc-primary-light) 100%);
+    background: linear-gradient(135deg, var(--arizona-blue) 0%, var(--arizona-red) 100%);
     color: white;
     padding: 2.5rem;
     text-align: center;
@@ -481,6 +511,31 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
+/* UAGC Bootstrap Color Overrides */
+.text-primary { color: var(--arizona-blue) !important; }
+.bg-primary { background-color: var(--arizona-blue) !important; }
+.btn-primary { 
+    background-color: var(--arizona-blue) !important; 
+    border-color: var(--arizona-blue) !important; 
+}
+.btn-outline-primary { 
+    color: var(--arizona-blue) !important; 
+    border-color: var(--arizona-blue) !important; 
+}
+.btn-outline-primary:hover { 
+    background-color: var(--arizona-blue) !important; 
+    border-color: var(--arizona-blue) !important; 
+}
+.border-primary { border-color: var(--arizona-blue) !important; }
+
+/* Orange highlight overrides */
+.text-warning { color: var(--highlight-orange) !important; }
+.bg-warning { background-color: var(--highlight-orange) !important; }
+.btn-warning { 
+    background-color: var(--highlight-orange) !important; 
+    border-color: var(--highlight-orange) !important; 
+}
+
 /* Footer Styling */
 footer {
     background: var(--uagc-primary);
@@ -541,6 +596,9 @@ footer {
             <div class="col-lg-10">
                 <div class="hero-content text-center text-white">
                     <div class="mb-5">
+                        <div class="uagc-logo">
+                            <img src="logo.png" alt="University of Arizona Global Campus" />
+                        </div>
                         <h1 class="display-3 fw-bold mb-3">
                             Q4 FY26 Quarterly Business Review
                         </h1>
@@ -564,24 +622,24 @@ footer {
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="executive-kpi">
-                                <i class="bi bi-target text-primary fs-1"></i>
-                                <div class="kpi-value text-primary">1.94%</div>
+                                <i class="bi bi-target fs-1" style="color: var(--arizona-blue);"></i>
+                                <div class="kpi-value" style="color: var(--arizona-blue);">1.94%</div>
                                 <div class="kpi-label">Conversion Rate</div>
                                 <div class="kpi-context">+0.32pp Improvement</div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="executive-kpi">
-                                <i class="bi bi-speedometer2 text-warning fs-1"></i>
-                                <div class="kpi-value text-warning">-14%</div>
+                                <i class="bi bi-speedometer2 fs-1" style="color: var(--highlight-orange);"></i>
+                                <div class="kpi-value" style="color: var(--highlight-orange);">-14%</div>
                                 <div class="kpi-label">Journey Time</div>
                                 <div class="kpi-context">Faster Conversions</div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="executive-kpi">
-                                <i class="bi bi-trophy text-info fs-1"></i>
-                                <div class="kpi-value text-info">62%</div>
+                                <i class="bi bi-trophy fs-1" style="color: var(--highlight-sky);"></i>
+                                <div class="kpi-value" style="color: var(--highlight-sky);">62%</div>
                                 <div class="kpi-label">Success Rate</div>
                                 <div class="kpi-context">36/58 Pages Improved</div>
                             </div>
@@ -592,12 +650,12 @@ footer {
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <div class="executive-summary text-dark">
-                                <h4 class="mb-3 text-primary">Executive Summary</h4>
+                                <h4 class="mb-3" style="color: var(--arizona-blue);">Executive Summary</h4>
                                 <p class="mb-0 fs-5">
                                     Our Q4 FY26 RFI optimization strategy achieved its primary objectives, delivering a <strong class="text-success">27.7% increase in lead generation</strong> 
                                     (516 → 659 monthly RFI submissions) while improving user experience efficiency. However, with massive SEO visibility waste 
                                     (<strong>45.7M impressions, 0.056% CTR</strong>), this foundation win sets the stage for transformational growth through 
-                                    comprehensive <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/seo-cro-audit-uagc.html" target="_blank" class="text-primary fw-bold text-decoration-none">SEO recovery</a>, <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/cookie/UAGC-cookie-personalization.html" target="_blank" class="text-info fw-bold text-decoration-none">AI personalization</a>, and <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/Reputation%20management/uagc-comprehensive-reputation-analysis.html" target="_blank" class="text-success fw-bold text-decoration-none">brand trust initiatives</a>.
+                                    comprehensive <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/seo-cro-audit-uagc.html" target="_blank" class="fw-bold text-decoration-none" style="color: var(--arizona-blue);">SEO recovery</a>, <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/cookie/UAGC-cookie-personalization.html" target="_blank" class="fw-bold text-decoration-none" style="color: var(--highlight-sky);">AI personalization</a>, and <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/Reputation%20management/uagc-comprehensive-reputation-analysis.html" target="_blank" class="fw-bold text-decoration-none" style="color: var(--arizona-red);">brand trust initiatives</a>.
                                     <br><small class="text-muted mt-2 d-block"><em>*Lead = Request for Information (RFI) form submission with valid contact details and program selection (GA4 event: request_information_submit)</em></small>
                                 </p>
                             </div>
@@ -1051,11 +1109,11 @@ footer {
                 <!-- Strategic Intelligence Hub -->
                 <div class="row mb-4">
                     <div class="col-12">
-                        <div class="alert alert-light border-2 border-primary">
+                        <div class="alert alert-light border-2" style="border-color: var(--arizona-blue) !important;">
                             <div class="row align-items-center">
                                 <div class="col-md-6">
                                     <h6 class="mb-2">
-                                        <i class="bi bi-collection text-primary me-2"></i>
+                                        <i class="bi bi-collection me-2" style="color: var(--arizona-blue);"></i>
                                         <strong>Complete Strategic Intelligence</strong>
                                     </h6>
                                     <p class="mb-0 small">Access comprehensive analysis & implementation plans for each strategic pillar</p>
@@ -1063,17 +1121,17 @@ footer {
                                 <div class="col-md-6">
                                     <div class="row g-2">
                                         <div class="col-md-4">
-                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/seo-cro-audit-uagc.html" target="_blank" class="btn btn-primary btn-sm w-100">
+                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/seo-cro-audit-uagc.html" target="_blank" class="btn btn-sm w-100" style="background-color: var(--arizona-blue); border-color: var(--arizona-blue); color: white;">
                                                 <i class="bi bi-search me-1"></i>SEO Recovery
                                             </a>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/cookie/UAGC-cookie-personalization.html" target="_blank" class="btn btn-info btn-sm w-100">
+                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/cookie/UAGC-cookie-personalization.html" target="_blank" class="btn btn-sm w-100" style="background-color: var(--highlight-sky); border-color: var(--highlight-sky); color: white;">
                                                 <i class="bi bi-robot me-1"></i>AI Strategy
                                             </a>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/Reputation%20management/uagc-comprehensive-reputation-analysis.html" target="_blank" class="btn btn-warning btn-sm w-100">
+                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/Reputation%20management/uagc-comprehensive-reputation-analysis.html" target="_blank" class="btn btn-sm w-100" style="background-color: var(--arizona-red); border-color: var(--arizona-red); color: white;">
                                                 <i class="bi bi-shield-check me-1"></i>Reputation
                                             </a>
                                         </div>
