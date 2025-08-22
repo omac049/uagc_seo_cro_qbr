@@ -128,7 +128,7 @@ if (typeof Chart === 'undefined') {
     --uagc-dark: var(--arizona-blue);
     
     /* UAGC Website Styling */
-    --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    --bg-flat: #f8f9fa;
     --card-shadow: 0 4px 12px rgba(12, 35, 75, 0.08);
     --card-shadow-hover: 0 8px 25px rgba(12, 35, 75, 0.12);
     
@@ -139,7 +139,7 @@ if (typeof Chart === 'undefined') {
 
 body {
     font-family: var(--font-primary);
-    background: var(--bg-gradient);
+    background: var(--bg-flat);
     color: #212529;
     line-height: 1.6;
     font-weight: 400;
@@ -147,7 +147,7 @@ body {
 
 /* Executive Hero Section */
 .executive-hero {
-    background: linear-gradient(135deg, var(--arizona-blue) 0%, var(--arizona-red) 100%);
+    background: var(--arizona-blue);
     color: white;
     min-height: 100vh;
     display: flex;
@@ -207,7 +207,7 @@ body {
 }
 
 .slide-header {
-    background: linear-gradient(135deg, var(--arizona-blue) 0%, var(--arizona-red) 100%);
+    background: var(--arizona-blue);
     color: white;
     padding: 2.5rem;
     text-align: center;
@@ -330,7 +330,7 @@ body {
 .progress-bar-custom {
     height: 100%;
     border-radius: 6px;
-    background: linear-gradient(90deg, var(--uagc-success), var(--uagc-info));
+    background: var(--uagc-success);
     transition: width 1s ease-out;
 }
 
@@ -369,7 +369,7 @@ body {
 
 /* Strategic Cards */
 .strategic-win {
-    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+    background: rgba(40, 167, 69, 0.1);
     border: 2px solid rgba(40, 167, 69, 0.2);
     border-radius: 12px;
     padding: 1.5rem;
@@ -383,7 +383,7 @@ body {
 }
 
 .challenge-item {
-    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(220, 53, 69, 0.05) 100%);
+    background: rgba(220, 53, 69, 0.1);
     border: 2px solid rgba(220, 53, 69, 0.2);
     border-radius: 12px;
     padding: 1.5rem;
@@ -397,8 +397,8 @@ body {
 }
 
 .action-item {
-    background: linear-gradient(135deg, rgba(23, 162, 184, 0.1) 0%, rgba(23, 162, 184, 0.05) 100%);
-    border: 2px solid rgba(23, 162, 184, 0.2);
+    background: rgba(12, 35, 75, 0.1);
+    border: 2px solid rgba(12, 35, 75, 0.2);
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 1rem;
@@ -546,7 +546,7 @@ footer {
 
 /* Enhanced Section Backgrounds */
 .enhanced-section {
-    background: linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(233, 236, 239, 0.8) 100%);
+    background: rgba(248, 249, 250, 0.8);
     border-radius: 16px;
     padding: 2rem;
     margin: 2rem 0;
