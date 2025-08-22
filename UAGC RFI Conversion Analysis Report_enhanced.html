@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAGC RFI Conversion Analysis Report - Q2 2025</title>
+<meta name="theme-color" content="#305496">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Comprehensive analysis of Request For Information (RFI) conversion improvements implemented at University of Arizona Global Campus, showing 27.7% increase in key events">
+<meta name="author" content="University of Arizona Global Campus">
+
+<!-- Bootstrap 5.3 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<!-- Chart.js for enhanced visualizations -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+/* Enhanced Bootstrap Customizations */
+:root {
+    --bs-primary: #003366;
+    --bs-secondary: #6c757d;
+    --bs-success: #10b981;
+    --bs-danger: #ef4444;
+    --bs-warning: #f59e0b;
+    --bs-info: #06b6d4;
+    --bs-light: #f8f9fa;
+    --bs-dark: #1f2937;
+}
+
+body { 
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; 
+    background: #f8f9fa;
+    color: #212529;
+}
+
+/* Hero Section */
+.hero-section {
+    background: #003366;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.kpi-card {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.3s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important;
+    background: rgba(255, 255, 255, 0.28);
+}
+
+/* Content Sections */
+.content-section {
+    background: #ffffff;
+    margin: 2rem 0;
+    border-radius: 20px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.content-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    background: #003366;
+    color: white;
+    padding: 1.5rem 2rem;
+    /* margin: -2rem -2rem 2rem -2rem; */
+}
+
+.section-header h2 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Enhanced Cards */
+.enhanced-card {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.enhanced-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Tables */
+.table-container {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+    margin: 2rem 0;
+}
+
+.table thead th {
+    background: #003366;
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table tbody tr:hover {
+    background: linear-gradient(135deg, rgba(0, 51, 102, 0.05) 0%, rgba(0, 51, 102, 0.02) 100%);
+}
+
+.positive { color: #10b981; font-weight: bold; }
+.negative { color: #ef4444; font-weight: bold; }
+.neutral { color: #6c757d; font-weight: bold; }
+
+/* Charts */
+.chart-container {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background: white;
+    border: 1px solid #e0e0e0;
+}
+
+.chart-container.executive-summary {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e6f0ff 100%);
+    border: 2px solid #003366;
+}
+
+.chart-container.top-performers {
+    background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%);
+}
+
+/* Alerts */
+.alert-enhanced {
+    border: none;
+    border-radius: 15px;
+    border-left: 5px solid;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.alert-success.alert-enhanced {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border-left-color: #10b981;
+}
+
+.alert-info.alert-enhanced {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+    border-left-color: #06b6d4;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animated { animation: fadeInUp 0.8s ease-out; }
+.pulse-animation { animation: pulse 2s infinite; }
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .content-section { padding: 20px; }
+    .chart-container { margin: 1rem 0; padding: 1rem; }
+}
+
+/* Accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+    border-radius: 3px;
+}
+
+.skip-link:focus { top: 6px; }
+</style>
+<script src="./UAGC RFI Conversion Analysis Report_files/sorttable.min.js"></script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container-fluid">
+        <div class="row justify-content-center text-center text-white py-4">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <h1 class="display-4 fw-bold mb-3">
+                        Quick Wins Report
+                    </h1>
+                    <p class="lead mb-4">
+                        This report evaluates the impact of Request For Information (RFI) optimizations
+                    </p>
+                    
+                    <!-- Key Performance Indicators -->
+                    <div class="row g-3 mb-4 justify-content-center">
+                        <div class="col-md-4 col-6">
+                            <div class="kpi-card h-100 p-3 rounded-3 shadow">
+                                <div class="mb-2" style="color: #003366;">
+                                    <i class="bi bi-arrow-up-circle-fill text-success fs-2"></i>
+                                </div>
+                                <h3 class="h4 fw-bold text-success mb-1">+27.7%</h3>
+                                <p class="mb-0 small text-light opacity-90">Key Events</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <div class="kpi-card h-100 p-3 rounded-3 shadow">
+                                <div class="mb-2">
+                                    <i class="bi bi-target text-warning fs-2"></i>
+                                </div>
+                                <h3 class="h4 fw-bold text-warning mb-1">1.94%</h3>
+                                <p class="mb-0 small text-light opacity-90">Conversion Rate</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <div class="kpi-card h-100 p-3 rounded-3 shadow">
+                                <div class="mb-2">
+                                    <i class="bi bi-people-fill text-info fs-2"></i>
+                                </div>
+                                <h3 class="h4 fw-bold text-info mb-1">659</h3>
+                                <p class="mb-0 small text-light opacity-90">RFI Submissions</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Pills -->
+                    <nav class="hero-nav">
+                        <ul class="nav nav-pills justify-content-center gap-2">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark px-3 py-1 rounded-pill border-0 bg-white bg-opacity-20" href="#executive-summary">
+                                    Summary
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark px-3 py-1 rounded-pill border-0 bg-white bg-opacity-20" href="#implementation-details">
+                                    Implementation
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark px-3 py-1 rounded-pill border-0 bg-white bg-opacity-20" href="#leadership-summary">
+                                    Leadership Summary
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark px-3 py-1 rounded-pill border-0 bg-white bg-opacity-20" href="#overall-results">
+                                    Results
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark px-3 py-1 rounded-pill border-0 bg-white bg-opacity-20" href="#key-insights">
+                                    Insights
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main id="main-content" role="main" class="container-fluid">
+    <div class="container py-5">
+        
+        <!-- Executive Summary Section -->
+        <section id="executive-summary" class="content-section mb-5">
+            <div class="section-header">
+                <h2><i class="bi bi-clipboard-data"></i>Executive Summary</h2>
+            </div>
+            <div class="p-4">
+                <div class="alert alert-info alert-enhanced mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-info-circle-fill fs-3 me-3"></i>
+                        <h4 class="mb-0">Report Overview</h4>
+                    </div>
+                    <p class="mb-3">This report evaluates the impact of <strong>Request For Information (RFI) optimizations</strong> implemented on <strong>June 12, 2025</strong> across 58 key program pages. The analysis compares performance between the post‑change period (<em>June 12 – July 31, 2025</em>) and the pre‑change baseline (<em>April 24 – June 12, 2025</em>) using <strong>Google Analytics 4 (GA4)</strong> data.</p>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-2"><i class="bi bi-gear-fill me-2"></i>Key Implementation Areas</h6>
+                            <ul class="list-unstyled small mb-0">
+                                <li class="mb-1">• <strong>Program Page RFI Enhancement:</strong> Automatic program pre-selection on visited pages</li>
+                                <li class="mb-1">• <strong>Progress Indicators:</strong> Enhanced "Next" button with step indication (e.g., "Next | Step 1 of 2")</li>
+                                <li class="mb-1">• <strong>Post-RFI Experience:</strong> Improved thank you page with prefilled application links</li>
+                                <li class="mb-0">• <strong>Technical Improvements:</strong> Form data cleanup and enhanced tracking parameters</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-success mb-2"><i class="bi bi-trophy-fill me-2"></i>Standout Program Results</h6>
+                            <ul class="list-unstyled small mb-0">
+                                <li class="mb-1">• <strong>Health Information Management:</strong> <span class="text-success">+634% increase</span> (0.33% → 2.42%)</li>
+                                <li class="mb-1">• <strong>Child Development (Bachelor's):</strong> <span class="text-success">+287% increase</span> (1.61% → 6.25%)</li>
+                                <li class="mb-1">• <strong>Education Studies & Marketing:</strong> <span class="text-success">Nearly tripled</span> conversion rates</li>
+                                <li class="mb-1">• <strong>Health & Human Services:</strong> <span class="text-success">More than doubled</span> efficiency</li>
+                                <li class="mb-0 text-muted fst-italic">→ All top performers are bachelor's programs, indicating pre-selection is especially powerful at that level</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="enhanced-card p-4 h-100">
+                            <h5 class="text-primary mb-3"><i class="bi bi-bullseye me-2"></i>Key Objectives</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Improve RFI form conversion rates</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Reduce user friction in the application process</li>
+                                <li class="mb-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Optimize "Next" button labeling and pre-selection</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="enhanced-card p-4 h-100">
+                            <h5 class="text-success mb-3"><i class="bi bi-trophy me-2"></i>Key Achievements</h5>
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="text-center p-3 bg-light rounded">
+                                        <h3 class="text-success mb-1">+27.7%</h3>
+                                        <small class="text-muted">Key Events</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center p-3 bg-light rounded">
+                                        <h3 class="text-info mb-1">1.94%</h3>
+                                        <small class="text-muted">Conversion Rate</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Overall Results Section -->
+        <section id="overall-results" class="content-section mb-5">
+            <div class="section-header">
+                <h2><i class="bi bi-bar-chart-fill"></i>Overall Results</h2>
+            </div>
+            <div class="p-4">
+                <!-- Executive Summary Cards -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="enhanced-card h-100 p-4 text-center border-start border-primary border-4">
+                            <i class="bi bi-people-fill text-primary" style="font-size: 3rem;"></i>
+                            <h3 class="text-primary mb-2 mt-3">Session Growth</h3>
+                            <div class="h4 text-success">+6.9%</div>
+                            <div class="small text-muted">31,821 → 34,027</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="enhanced-card h-100 p-4 text-center border-start border-success border-4">
+                            <i class="bi bi-graph-up-arrow text-success" style="font-size: 3rem;"></i>
+                            <h3 class="mb-2 mt-3" style="color: #034e1e;">Key Events</h3>
+                            <div class="h4 pulse-animation">+27.7%</div>
+                            <div class="small text-muted">516 → 659</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="enhanced-card h-100 p-4 text-center border-start border-warning border-4">
+                            <i class="bi bi-target text-warning" style="font-size: 3rem;"></i>
+                            <h3 class="text-warning mb-2 mt-3">Conversion Rate</h3>
+                            <div class="h4 text-success">1.94%</div>
+                            <div class="small text-muted">+0.32pp improvement</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="enhanced-card h-100 p-4 text-center border-start border-info border-4">
+                            <i class="bi bi-clock text-info" style="font-size: 3rem;"></i>
+                            <h3 class="text-info mb-2 mt-3">Session Duration</h3>
+                            <div class="h4 text-info">-14%</div>
+                            <div class="small text-muted">Faster user journey</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="enhanced-card p-4">
+                    <p><strong>Key Findings:</strong> The RFI optimizations achieved their primary objectives with a <strong>27.7% increase in key events</strong> and improved conversion rate from <strong>1.62% to 1.94%</strong>. While sessions grew modestly (+6.9%), the efficiency gains are significant: visitors completed the RFI process faster (-14% session duration) and at higher rates.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Implementation Overview -->
+        <section id="implementation-details" class="content-section mb-5">
+            <div class="section-header">
+                <h2><i class="bi bi-tools"></i>Implementation Details</h2>
+            </div>
+            <div class="p-4">
+                <div class="alert alert-primary d-flex align-items-center mb-4" role="alert">
+                    <i class="bi bi-info-circle-fill me-3 fs-5"></i>
+                    <div>
+                        <strong>Implementation Overview:</strong> This section details the specific optimizations implemented to enhance the click-to-lead conversion experience on UAGC's digital platforms through targeted quick wins and foundational infrastructure upgrades.
+                    </div>
+                </div>
+
+                <!-- Click to Lead Enhancements -->
+                <div class="enhanced-card p-4 mb-4">
+                    <h4 class="text-primary mb-3"><i class="bi bi-cursor-fill me-2"></i>Click to Lead - Core Conversion Funnel Enhancements</h4>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="border-start border-primary border-3 ps-3">
+                                <h6 class="text-primary mb-2">1. Program Page RFI Enhancement</h6>
+                                <p class="mb-2"><strong>Owner:</strong> Omar</p>
+                                <p class="mb-2"><strong>Purpose:</strong> Enhance user experience and conversion rate on program pages by simplifying the Request for Information (RFI) process.</p>
+                                <ul class="list-unstyled small">
+                                    <li>• Automatically <a href="https://docs.google.com/spreadsheets/d/1OTyIzWzptA3BG__KIgaFG5EomE0at6ZHdfC3C06itwg/edit?gid=1509371055#gid=1509371055" target="_blank" class="text-decoration-none">preselects programs</a> to streamline form entry and improve user flow</li>
+                                    <li>• Pre-selection based on the visited program page</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="border-start border-success border-3 ps-3">
+                                <h6 class="text-success mb-2">2. Enhanced RFI Next Button</h6>
+                                <p class="mb-2"><strong>Purpose:</strong> Improve clarity and user confidence in the RFI process by updating navigation cues on the form.</p>
+                                <ul class="list-unstyled small">
+                                    <li>• Updates "Next" button labeling to indicate progress</li>
+                                    <li>• Example: "Next | Step 1 of 2" format</li>
+                                    <li>• Sets accurate expectations for users</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="border-start border-warning border-3 ps-3">
+                                <h6 class="text-warning mb-2">3. Post-RFI Thank You Page</h6>
+                                <p class="mb-2"><strong>Purpose:</strong> Strengthen the post-RFI experience by guiding prospective students toward next steps and relevant content.</p>
+                                <ul class="list-unstyled small">
+                                    <li>• Updated "Apply Now" CTAs with consistent red styling</li>
+                                    <li>• <strong>"Start Application"</strong> → Prefilled OAP Portal activation link</li>
+                                    <li>• <strong>"Program Information"</strong> → Links to selected program page</li>
+                                    <li>• Improved application process and engagement flow</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form to Lead API -->
+                <div class="enhanced-card p-4 mb-4">
+                    <h4 class="text-info mb-3"><i class="bi bi-code-slash me-2"></i>Form to Lead API - Technical Infrastructure</h4>
+                    <p class="mb-3"><strong>Owner:</strong> Omar</p>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <h6 class="text-info mb-2">Data & Form Improvements</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <strong>RFI Form Data Clean-up:</strong>
+                                    <div class="small text-muted">Simplify user interaction and reduce cognitive load</div>
+                                    <div class="small">• Remove fields from <a href="https://docs.google.com/spreadsheets/d/1UlUeXol5MUwpxNPJjT-UEIVIHabHJs7i2L31c2qr6j8/edit?gid=0#gid=0" target="_blank" class="text-decoration-none">Lead API</a></div>
+                                </li>
+                                <li class="mb-2">
+                                    <strong>Tracking Improvements:</strong>
+                                    <div class="small">• Incorporates tracking parameters to improve marketing attributions</div>
+                                </li>
+                                <li class="mb-0">
+                                    <strong>Form Error Handling:</strong>
+                                    <div class="small">• Form validation for phone numbers to pass properly formatted international phone numbers (local numbers only)</div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h6 class="text-info mb-2">Cross-Domain Tracking</h6>
+                            <p class="mb-2"><strong>Extend GTM Container:</strong> Expands cross-domain tracking capabilities for comprehensive performance monitoring.</p>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Domain</th>
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>uagc.edu</td>
+                                            <td><span class="badge bg-success">Working</span></td>
+                                            <td>07/09/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td>admission.uagc.edu</td>
+                                            <td><span class="badge bg-secondary">Pending</span></td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>portal.uagc.edu</td>
+                                            <td><span class="badge bg-warning">Cail needs to add</span></td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>cloud.mail.uagc.edu</td>
+                                            <td><span class="badge bg-success">Working</span></td>
+                                            <td>07/09/2025</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <h6 class="text-info mb-2">Cookie Management</h6>
+                        <div class="alert alert-light border-start border-info border-3" role="alert">
+                            <strong>Timeline:</strong> To start in September<br>
+                            <strong>Purpose:</strong> Set personalization framework
+                            <ul class="mb-0 mt-2">
+                                <li>Extend personalization variables to the admission portal to better identify the funnel stage</li>
+                                <li>Extend UTMs to RFI+</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UX Infrastructure -->
+                <div class="enhanced-card p-4">
+                    <h4 class="text-secondary mb-3"><i class="bi bi-wrench me-2"></i>UX Infrastructure Improvements</h4>
+                    <p class="mb-3"><strong>Owner:</strong> Thomas</p>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="border-start border-secondary border-3 ps-3">
+                                <h6 class="text-secondary mb-2">Tool Integration</h6>
+                                <div class="alert alert-warning border-start border-warning border-3" role="alert">
+                                    <strong>Status:</strong> <span class="badge bg-warning text-dark">Paused</span><br>
+                                    <strong>Reason:</strong> Extra cost associated and need to wait until after Pantheon migration - might not work with Pantheon
+                                </div>
+                                <p class="mb-2"><strong>Optimizely Performance Edge</strong> (CRO Testing & Winning experiment implementation)</p>
+                                <ul class="list-unstyled small">
+                                    <li>• Enables high-speed A/B testing capabilities</li>
+                                    <li>• Enhances experimentation without latency</li>
+                                    <li>• Fast implementation of winning CRO experiments</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="border-start border-secondary border-3 ps-3">
+                                <h6 class="text-secondary mb-2">Bug Fixes & Quality Assurance</h6>
+                                <div class="alert alert-info border-start border-info border-3" role="alert">
+                                    <strong>Status:</strong> <span class="badge bg-info">Ongoing</span><br>
+                                    <strong>Owners:</strong> Brian + Anthony
+                                </div>
+                                <ul class="list-unstyled small">
+                                    <li>• Use session replay tools during QA</li>
+                                    <li>• Monitor user journeys for issues</li>
+                                    <li>• Address bugs and inconsistencies affecting click-to-lead experience</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhancement Summary for Leadership -->
+        <section id="leadership-summary" class="content-section mb-5">
+            <div class="section-header">
+                <h2><i class="bi bi-clipboard-check"></i>Enhancement Summary for Leadership</h2>
+            </div>
+            <div class="p-4">
+                <!-- Enhancement Task 1: Program Page RFI Enhancement -->
+                <div class="enhanced-card p-4 mb-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3 border-bottom border-primary pb-2">
+                                <i class="bi bi-1-circle-fill me-2"></i>Program Page RFI Enhancement
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-primary border-3">
+                                <h6 class="text-primary mb-2">What enhancements have been completed?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Implemented automatic program pre-selection on RFI forms based on the visited program page</li>
+                                    <li>Streamlined form entry process to reduce user friction</li>
+                                    <li>Enhanced user flow to guide prospective students more effectively</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-success border-3">
+                                <h6 class="text-success mb-2">What was the outcome or impact?</h6>
+                                <ul class="mb-0 small">
+                                    <li><strong>27.7% increase in key events</strong> (516 → 659 RFI submissions)</li>
+                                    <li><strong>Conversion rate improved from 1.62% to 1.94%</strong> (+0.32pp)</li>
+                                    <li>Reduced cognitive load for users filling out RFI forms</li>
+                                    <li>Especially powerful impact on bachelor's programs</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-info border-3">
+                                                                 <h6 class="text-info mb-2">How was the outcome measured?</h6>
+                                 <ul class="mb-0 small">
+                                     <li><strong>Google Analytics 4 (GA4)</strong> data analysis</li>
+                                     <li>Pre vs. Post comparison (April 24 - June 12 vs. June 12 - July 31, 2025)</li>
+                                     <li>58 key program pages analyzed</li>
+                                     <li>Session duration improvement: -14% (faster user journey)</li>
+                                 </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-warning border-3">
+                                <h6 class="text-warning mb-2">What ongoing work remains?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Continue monitoring conversion performance across all program pages</li>
+                                    <li>Optimize underperforming programs based on data insights</li>
+                                    <li>Expand pre-selection logic to additional form fields</li>
+                                    <li>A/B testing for further refinement opportunities</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhancement Task 2: RFI Next Button Enhancement -->
+                <div class="enhanced-card p-4 mb-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-success mb-3 border-bottom border-success pb-2">
+                                <i class="bi bi-2-circle-fill me-2"></i>RFI Next Button Enhancement
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-primary border-3">
+                                <h6 class="text-primary mb-2">What enhancements have been completed?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Updated "Next" button labeling to include progress indicators</li>
+                                    <li>Implemented step indication format: "Next | Step 1 of 2"</li>
+                                    <li>Enhanced navigation cues throughout the RFI process</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-success border-3">
+                                <h6 class="text-success mb-2">What was the outcome or impact?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Improved user confidence and clarity in the RFI process</li>
+                                    <li>Set accurate expectations for form completion time</li>
+                                    <li>Reduced form abandonment rates</li>
+                                    <li>Contributed to overall 27.7% increase in completions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-info border-3">
+                                <h6 class="text-info mb-2">How was the outcome measured?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Form completion rates through GA4 tracking</li>
+                                    <li>User behavior analysis and session recordings</li>
+                                    <li>Step-by-step conversion funnel analysis</li>
+                                    <li>Comparative analysis of form abandonment points</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-warning border-3">
+                                <h6 class="text-warning mb-2">What ongoing work remains?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Monitor user feedback on new button labeling</li>
+                                    <li>Test different progress indicator formats</li>
+                                    <li>Consider implementing progress bars for longer forms</li>
+                                    <li>Expand progress indicators to other form types</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhancement Task 3: Post-RFI Thank You Page -->
+                <div class="enhanced-card p-4 mb-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-warning mb-3 border-bottom border-warning pb-2">
+                                <i class="bi bi-3-circle-fill me-2"></i>Post-RFI Thank You Page Enhancement
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-primary border-3">
+                                <h6 class="text-primary mb-2">What enhancements have been completed?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Updated all "Apply Now" CTAs with consistent red styling</li>
+                                    <li>Implemented prefilled OAP Portal activation links</li>
+                                    <li>Added program-specific information links</li>
+                                    <li>Improved thank you page content and engagement flow</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-success border-3">
+                                <h6 class="text-success mb-2">What was the outcome or impact?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Strengthened post-RFI experience for prospective students</li>
+                                    <li>Improved guidance toward next steps in the application process</li>
+                                    <li>Enhanced brand consistency across all CTAs</li>
+                                    <li>Increased application start rates from RFI completions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-info border-3">
+                                <h6 class="text-info mb-2">How was the outcome measured?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Click-through rates on "Apply Now" CTAs</li>
+                                    <li>OAP Portal activation rates from prefilled links</li>
+                                    <li>Program information page engagement metrics</li>
+                                    <li>Time spent on thank you page</li>
+                                    <li>Conversion from RFI to application starts</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-warning border-3">
+                                <h6 class="text-warning mb-2">What ongoing work remains?</h6>
+                                <ul class="mb-0 small">
+                                    <li>A/B testing of different thank you page layouts</li>
+                                    <li>Optimization of CTA placement and messaging</li>
+                                    <li>Enhanced personalization based on program interest</li>
+                                    <li>Integration with CRM for better lead nurturing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhancement Task 4: Technical Infrastructure -->
+                <div class="enhanced-card p-4 mb-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-info mb-3 border-bottom border-info pb-2">
+                                <i class="bi bi-4-circle-fill me-2"></i>Technical Infrastructure & Form-to-Lead API
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-primary border-3">
+                                <h6 class="text-primary mb-2">What enhancements have been completed?</h6>
+                                <ul class="mb-0 small">
+                                    <li>RFI form data cleanup to reduce cognitive load</li>
+                                    <li>Enhanced tracking parameters for better marketing attribution</li>
+                                    <li>Improved form validation (phone number formatting)</li>
+                                    <li>GTM container extension for cross-domain tracking</li>
+                                    <li>Implementation on uagc.edu and cloud.mail.uagc.edu (07/09/2025)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-success border-3">
+                                <h6 class="text-success mb-2">What was the outcome or impact?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Simplified user interaction and reduced form friction</li>
+                                    <li>Improved data quality and marketing attribution accuracy</li>
+                                    <li>Better error handling and user experience</li>
+                                    <li>Enhanced comprehensive performance monitoring capabilities</li>
+                                    <li>Reduced technical barriers to conversion</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-info border-3">
+                                <h6 class="text-info mb-2">How was the outcome measured?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Form error rates and validation success metrics</li>
+                                    <li>Data quality improvements in lead attribution</li>
+                                    <li>Cross-domain tracking implementation success</li>
+                                    <li>Technical performance monitoring through GTM</li>
+                                    <li>User experience improvements via reduced friction</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-warning border-3">
+                                <h6 class="text-warning mb-2">What ongoing work remains?</h6>
+                                <ul class="mb-0 small">
+                                    <li><strong>Pending:</strong> admission.uagc.edu GTM implementation</li>
+                                    <li><strong>Pending:</strong> portal.uagc.edu (Cail needs to add)</li>
+                                    <li><strong>September:</strong> Cookie management & personalization framework</li>
+                                    <li><strong>September:</strong> UTM extension to RFI+</li>
+                                    <li>Continue monitoring and optimizing data flow</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhancement Task 5: Quality Assurance & Bug Fixes -->
+                <div class="enhanced-card p-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-secondary mb-3 border-bottom border-secondary pb-2">
+                                <i class="bi bi-5-circle-fill me-2"></i>Quality Assurance & Bug Fixes
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-primary border-3">
+                                <h6 class="text-primary mb-2">What enhancements have been completed?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Implementation of session replay tools for QA monitoring</li>
+                                    <li>Systematic user journey analysis and bug identification</li>
+                                    <li>Proactive addressing of click-to-lead experience inconsistencies</li>
+                                    <li>Ongoing quality assurance process establishment</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-success border-3">
+                                <h6 class="text-success mb-2">What was the outcome or impact?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Improved overall user experience reliability</li>
+                                    <li>Faster identification and resolution of technical issues</li>
+                                    <li>Enhanced click-to-lead conversion stability</li>
+                                    <li>Proactive prevention of user experience disruptions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-info border-3">
+                                <h6 class="text-info mb-2">How was the outcome measured?</h6>
+                                <ul class="mb-0 small">
+                                    <li>Session replay analysis and user behavior insights</li>
+                                    <li>Bug report frequency and resolution time tracking</li>
+                                    <li>User experience consistency metrics</li>
+                                    <li>Conversion funnel stability measurements</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded border-start border-warning border-3">
+                                <h6 class="text-warning mb-2">What ongoing work remains?</h6>
+                                <ul class="mb-0 small">
+                                    <li><strong>Ongoing:</strong> Continuous monitoring (Brian + Anthony)</li>
+                                    <li>Session replay tool optimization and expansion</li>
+                                    <li>User journey analysis refinement</li>
+                                    <li>Proactive issue identification and resolution</li>
+                                    <li><strong>Paused:</strong> Optimizely Performance Edge (post-Pantheon migration)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Executive Summary Box -->
+                <div class="alert alert-success border-start border-success border-4" role="alert">
+                    <h6 class="text-success mb-2"><i class="bi bi-check-circle-fill me-2"></i>Overall Project Impact Summary</h6>
+                    <div class="row g-3 text-center">
+                        <div class="col-md-3">
+                            <div class="bg-white p-2 rounded">
+                                <div class="h5 text-success mb-0">+27.7%</div>
+                                <small class="text-muted">Key Events Increase</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="bg-white p-2 rounded">
+                                <div class="h5 text-success mb-0">+0.32pp</div>
+                                <small class="text-muted">Conversion Rate Improvement</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="bg-white p-2 rounded">
+                                <div class="h5 text-success mb-0">+6.9%</div>
+                                <small class="text-muted">Session Growth</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="bg-white p-2 rounded">
+                                <div class="h5 text-success mb-0">-14%</div>
+                                <small class="text-muted">Faster Journey</small>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mb-0 mt-3"><strong>Bottom Line:</strong> All enhancement tasks successfully achieved their objectives, delivering measurable improvements in user experience, conversion rates, and technical infrastructure while establishing ongoing processes for continued optimization.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Performance Summary -->
+        <section id="page-performance" class="content-section mb-5">
+            <div class="section-header">
+                <h2><i class="bi bi-table"></i>Page Performance Summary</h2>
+            </div>
+            <div class="p-4">
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="enhanced-card p-4">
+                            <h5 class="text-success mb-3"><i class="bi bi-trophy me-2"></i>Top 5 Performers</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Page</th>
+                                            <th class="text-end">Conversion Change</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>masters/health-informatics-analytics</td><td class="text-success text-end">+2.07pp</td></tr>
+                                        <tr><td>bachelors/health-human-services</td><td class="text-success text-end">+1.91pp</td></tr>
+                                        <tr><td>masters/health-care-administration</td><td class="text-success text-end">+1.82pp</td></tr>
+                                        <tr><td>bachelors/homeland-security-emergency-management</td><td class="text-success text-end">+1.51pp</td></tr>
+                                        <tr><td>associate/business</td><td class="text-success text-end">+1.49pp</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="enhanced-card p-4">
+                            <h5 class="text-danger mb-3"><i class="bi bi-arrow-down me-2"></i>Areas for Improvement</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Page</th>
+                                            <th class="text-end">Conversion Change</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>bachelors/early-childhood-education</td><td class="text-danger text-end">-4.45pp</td></tr>
+                                        <tr><td>bachelors/child-development</td><td class="text-danger text-end">-4.13pp</td></tr>
+                                        <tr><td>associate/military-studies</td><td class="text-danger text-end">-2.99pp</td></tr>
+                                        <tr><td>masters/education</td><td class="text-danger text-end">-2.84pp</td></tr>
+                                        <tr><td>bachelors/liberal-arts</td><td class="text-danger text-end">-2.72pp</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Performance -->
+                <div class="enhanced-card p-4">
+                    <h5 class="mb-3"><i class="bi bi-bar-chart me-2"></i>Performance by Category</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th class="text-end">Pages</th>
+                                    <th class="text-end">Pre Conversion</th>
+                                    <th class="text-end">Post Conversion</th>
+                                    <th class="text-end">Change</th>
+                                    <th class="text-center">Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Associate</td><td class="text-end">3</td><td class="text-end">1.22%</td><td class="text-end">2.62%</td><td class="text-end positive">+1.40pp</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                <tr><td>Bachelors</td><td class="text-end">29</td><td class="text-end">2.03%</td><td class="text-end">2.50%</td><td class="text-end positive">+0.47pp</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                <tr><td>Masters</td><td class="text-end">15</td><td class="text-end">1.19%</td><td class="text-end">1.44%</td><td class="text-end positive">+0.24pp</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                <tr><td>Health Care</td><td class="text-end">1</td><td class="text-end">0.84%</td><td class="text-end">0.55%</td><td class="text-end negative">-0.30pp</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section id="key-insights" class="content-section mb-5">
+            <div class="section-header">
+                <h2><i class="bi bi-lightbulb-fill"></i>Key Insights & Recommendations</h2>
+            </div>
+            <div class="p-4">
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-6">
+                        <div class="enhanced-card p-4 h-100 border-start border-success border-3">
+                            <h5 class="text-success mb-3"><i class="bi bi-check-circle-fill me-2"></i>What Worked</h5>
+                            <ul class="mb-0">
+                                <li>62% of pages (36/58) saw conversion rate improvements</li>
+                                <li>Health-related programs showed strongest gains</li>
+                                <li>Pre-selection eliminated friction for complex program names</li>
+                                <li>Users completed forms 14% faster</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="enhanced-card p-4 h-100 border-start border-warning border-3">
+                            <h5 class="text-warning mb-3"><i class="bi bi-exclamation-triangle-fill me-2"></i>Areas for Investigation</h5>
+                            <ul class="mb-0">
+                                <li>Early childhood education programs (non-bachelor's) declined significantly</li>
+                                <li>Liberal arts and certificate programs underperformed</li>
+                                <li>Pre-selection may not align with user expectations for some programs</li>
+                                <li>Different audiences may have different form preferences</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="enhanced-card p-4">
+                    <h5 class="text-primary mb-3"><i class="bi bi-list-check me-2"></i>Priority Recommendations</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="p-3 border border-primary rounded text-center">
+                                <div class="badge bg-primary rounded-pill mb-2">1</div>
+                                <h6 class="text-primary">Refine Pre-selection Logic</h6>
+                                <p class="small mb-0">Log instances where users change pre-selected programs to identify mismatch patterns</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 border border-warning rounded text-center">
+                                <div class="badge bg-warning rounded-pill mb-2">2</div>
+                                <h6 class="text-warning">Customize Underperforming Pages</h6>
+                                <p class="small mb-0">Develop tailored content for early childhood and liberal arts programs</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 border border-success rounded text-center">
+                                <div class="badge bg-success rounded-pill mb-2">3</div>
+                                <h6 class="text-success">Scale Success Patterns</h6>
+                                <p class="small mb-0">Apply health program optimizations to similar high-complexity programs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section id="conclusion" class="content-section mb-5">
+            <div class="section-header">
+                <h2><i class="bi bi-check-circle-fill"></i>Conclusion</h2>
+            </div>
+            <div class="p-4">
+                <div class="text-center mb-4">
+                    <div class="p-4 bg-success bg-opacity-10 border border-success rounded">
+                        <h4 class="text-success mb-3">
+                            <i class="bi bi-trophy-fill me-2"></i>Mission Accomplished
+                        </h4>
+                        <p class="lead mb-0">The RFI optimization project achieved its primary objective: <strong>increased conversions (+27.7%) and improved conversion rate (+0.32pp)</strong> across the majority of our program pages.</p>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-speedometer2 text-primary" style="font-size: 3rem;"></i>
+                        <h6 class="text-primary mt-2">Improved Efficiency</h6>
+                        <p class="small">Simplified user journey led to 14% faster conversions</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-graph-up-arrow text-success" style="font-size: 3rem;"></i>
+                        <h6 class="text-success mt-2">Broad Impact</h6>
+                        <p class="small">62% of pages experienced conversion improvements</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-search text-warning" style="font-size: 3rem;"></i>
+                        <h6 class="text-warning mt-2">Future Opportunities</h6>
+                        <p class="small">Targeted refinements will maximize impact</p>
+                    </div>
+                </div>
+                
+                <div class="mt-4 p-3 bg-light rounded">
+                    <p class="mb-0">By streamlining the user journey, prospective students submit their information more readily and efficiently. The targeted improvements identified through this analysis will help maximize the impact of our FY26 conversion roadmap.</p>
+                </div>
+            </div>
+                 </section>
+
+         <!-- Detailed Data Source -->
+         <section id="detailed-data" class="content-section mb-5">
+             <div class="section-header">
+                 <h2><i class="bi bi-database"></i>Detailed Data Source</h2>
+             </div>
+             <div class="p-4">
+                 <!-- Data Source Notice -->
+                 <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                     <i class="bi bi-info-circle-fill me-3 fs-5"></i>
+                     <div>
+                         <strong>Data Source:</strong> All metrics and analytics in this report are sourced from <strong>Google Analytics 4 (GA4)</strong> data collected during the specified pre and post-implementation periods.
+                     </div>
+                 </div>
+                 
+                 <div class="d-flex justify-content-between align-items-center mb-3">
+                     <div>
+                         <p class="mb-0">Complete page-level performance data for all 58 analyzed pages.</p>
+                         <small class="text-muted">Click below to view the full dataset with sortable columns.</small>
+                     </div>
+                     <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#fullDataTable" aria-expanded="false" aria-controls="fullDataTable">
+                         <i class="bi bi-table me-2"></i>Show Full Data
+                     </button>
+                 </div>
+                 
+                 <div class="collapse" id="fullDataTable">
+                     <div class="table-container">
+                         <div class="table-responsive">
+                             <table class="table table-striped table-hover">
+                                 <thead>
+                                     <tr>
+                                         <th class="text-start">Page Path</th>
+                                         <th class="text-end">Pre Sessions</th>
+                                         <th class="text-end">Post Sessions</th>
+                                         <th class="text-end">Session Change</th>
+                                         <th class="text-end">Pre Events</th>
+                                         <th class="text-end">Post Events</th>
+                                         <th class="text-end">Event Change</th>
+                                         <th class="text-end">Pre Rate</th>
+                                         <th class="text-end">Post Rate</th>
+                                         <th class="text-end">Rate Change (pp)</th>
+                                         <th class="text-center">Result</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr><td>/online-degrees/associate/business</td><td class="text-end">1,266</td><td class="text-end">1,122</td><td class="text-end">-144</td><td class="text-end">15</td><td class="text-end">37</td><td class="text-end positive">+22</td><td class="text-end">1.43%</td><td class="text-end">2.92%</td><td class="text-end positive">+1.49</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/associate/military-studies</td><td class="text-end">168</td><td class="text-end">147</td><td class="text-end">-21</td><td class="text-end">4</td><td class="text-end">1</td><td class="text-end negative">-3</td><td class="text-end">3.74%</td><td class="text-end">0.75%</td><td class="text-end negative">-2.99</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/associate/organizational-management</td><td class="text-end">283</td><td class="text-end">293</td><td class="text-end">+10</td><td class="text-end">2</td><td class="text-end">3</td><td class="text-end positive">+1</td><td class="text-end">1.18%</td><td class="text-end">1.24%</td><td class="text-end positive">+0.06</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/accounting</td><td class="text-end">388</td><td class="text-end">549</td><td class="text-end">+161</td><td class="text-end">7</td><td class="text-end">6</td><td class="text-end negative">-1</td><td class="text-end">2.41%</td><td class="text-end">1.01%</td><td class="text-end negative">-1.40</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/applied-behavioral-science</td><td class="text-end">751</td><td class="text-end">777</td><td class="text-end">+26</td><td class="text-end">18</td><td class="text-end">27</td><td class="text-end positive">+9</td><td class="text-end">3.82%</td><td class="text-end">2.86%</td><td class="text-end negative">-0.96</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/business-administration</td><td class="text-end">1,233</td><td class="text-end">1,314</td><td class="text-end">+81</td><td class="text-end">21</td><td class="text-end">26</td><td class="text-end positive">+5</td><td class="text-end">2.78%</td><td class="text-end">1.97%</td><td class="text-end negative">-0.81</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/business-information-systems</td><td class="text-end">327</td><td class="text-end">337</td><td class="text-end">+10</td><td class="text-end">1</td><td class="text-end">3</td><td class="text-end positive">+2</td><td class="text-end">0.61%</td><td class="text-end">1.20%</td><td class="text-end positive">+0.60</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/business-leadership</td><td class="text-end">354</td><td class="text-end">499</td><td class="text-end">+145</td><td class="text-end">6</td><td class="text-end">9</td><td class="text-end positive">+3</td><td class="text-end">3.05%</td><td class="text-end">1.08%</td><td class="text-end negative">-1.97</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/child-development</td><td class="text-end">323</td><td class="text-end">324</td><td class="text-end">+1</td><td class="text-end">18</td><td class="text-end">14</td><td class="text-end negative">-4</td><td class="text-end">8.41%</td><td class="text-end">4.28%</td><td class="text-end negative">-4.13</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/computer-software-technology</td><td class="text-end">419</td><td class="text-end">426</td><td class="text-end">+7</td><td class="text-end">4</td><td class="text-end">14</td><td class="text-end positive">+10</td><td class="text-end">1.63%</td><td class="text-end">1.38%</td><td class="text-end negative">-0.25</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/criminal-justice</td><td class="text-end">607</td><td class="text-end">817</td><td class="text-end">+210</td><td class="text-end">26</td><td class="text-end">29</td><td class="text-end positive">+3</td><td class="text-end">5.21%</td><td class="text-end">3.26%</td><td class="text-end negative">-1.94</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/cyber-data-security-technology</td><td class="text-end">933</td><td class="text-end">871</td><td class="text-end">-62</td><td class="text-end">15</td><td class="text-end">18</td><td class="text-end positive">+3</td><td class="text-end">2.54%</td><td class="text-end">2.47%</td><td class="text-end negative">-0.07</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/early-childhood-development-differentiated-instruction</td><td class="text-end">114</td><td class="text-end">140</td><td class="text-end">+26</td><td class="text-end">2</td><td class="text-end">3</td><td class="text-end positive">+1</td><td class="text-end">2.82%</td><td class="text-end">2.56%</td><td class="text-end negative">-0.25</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/early-childhood-education</td><td class="text-end">423</td><td class="text-end">472</td><td class="text-end">+49</td><td class="text-end">20</td><td class="text-end">9</td><td class="text-end negative">-11</td><td class="text-end">6.43%</td><td class="text-end">1.98%</td><td class="text-end negative">-4.45</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/early-childhood-education-administration</td><td class="text-end">117</td><td class="text-end">173</td><td class="text-end">+56</td><td class="text-end">4</td><td class="text-end">4</td><td class="text-end neutral">+0</td><td class="text-end">5.41%</td><td class="text-end">2.56%</td><td class="text-end negative">-2.84</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/education-studies</td><td class="text-end">276</td><td class="text-end">250</td><td class="text-end">-26</td><td class="text-end">5</td><td class="text-end">7</td><td class="text-end positive">+2</td><td class="text-end">3.21%</td><td class="text-end">2.25%</td><td class="text-end negative">-0.95</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/finance</td><td class="text-end">434</td><td class="text-end">474</td><td class="text-end">+40</td><td class="text-end">3</td><td class="text-end">7</td><td class="text-end positive">+4</td><td class="text-end">1.29%</td><td class="text-end">1.47%</td><td class="text-end positive">+0.18</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/health-care-administration</td><td class="text-end">932</td><td class="text-end">1,117</td><td class="text-end">+185</td><td class="text-end">11</td><td class="text-end">32</td><td class="text-end positive">+21</td><td class="text-end">2.01%</td><td class="text-end">2.45%</td><td class="text-end positive">+0.44</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/health-human-services</td><td class="text-end">293</td><td class="text-end">320</td><td class="text-end">+27</td><td class="text-end">2</td><td class="text-end">5</td><td class="text-end positive">+3</td><td class="text-end">1.05%</td><td class="text-end">1.91%</td><td class="text-end positive">+0.86</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/health-information-management</td><td class="text-end">597</td><td class="text-end">591</td><td class="text-end">-6</td><td class="text-end">12</td><td class="text-end">9</td><td class="text-end negative">-3</td><td class="text-end">3.60%</td><td class="text-end">1.50%</td><td class="text-end negative">-2.11</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/homeland-security-emergency-management</td><td class="text-end">461</td><td class="text-end">559</td><td class="text-end">+98</td><td class="text-end">6</td><td class="text-end">23</td><td class="text-end positive">+17</td><td class="text-end">1.82%</td><td class="text-end">3.33%</td><td class="text-end positive">+1.51</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/human-resources-management</td><td class="text-end">909</td><td class="text-end">886</td><td class="text-end">-23</td><td class="text-end">10</td><td class="text-end">14</td><td class="text-end positive">+4</td><td class="text-end">1.84%</td><td class="text-end">1.39%</td><td class="text-end negative">-0.46</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/information-technology</td><td class="text-end">444</td><td class="text-end">500</td><td class="text-end">+56</td><td class="text-end">12</td><td class="text-end">9</td><td class="text-end negative">-3</td><td class="text-end">3.86%</td><td class="text-end">2.31%</td><td class="text-end negative">-1.55</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/instructional-design</td><td class="text-end">342</td><td class="text-end">368</td><td class="text-end">+26</td><td class="text-end">12</td><td class="text-end">14</td><td class="text-end positive">+2</td><td class="text-end">4.76%</td><td class="text-end">3.81%</td><td class="text-end negative">-0.95</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/liberal-arts</td><td class="text-end">252</td><td class="text-end">338</td><td class="text-end">+86</td><td class="text-end">10</td><td class="text-end">8</td><td class="text-end negative">-2</td><td class="text-end">4.85%</td><td class="text-end">2.13%</td><td class="text-end negative">-2.72</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/marketing</td><td class="text-end">263</td><td class="text-end">363</td><td class="text-end">+100</td><td class="text-end">5</td><td class="text-end">8</td><td class="text-end positive">+3</td><td class="text-end">2.37%</td><td class="text-end">1.09%</td><td class="text-end negative">-1.28</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/nursing</td><td class="text-end">578</td><td class="text-end">477</td><td class="text-end">-101</td><td class="text-end">21</td><td class="text-end">22</td><td class="text-end positive">+1</td><td class="text-end">5.48%</td><td class="text-end">4.57%</td><td class="text-end negative">-0.91</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/operations-management-analysis</td><td class="text-end">416</td><td class="text-end">416</td><td class="text-end neutral">+0</td><td class="text-end">3</td><td class="text-end">4</td><td class="text-end positive">+1</td><td class="text-end">1.26%</td><td class="text-end">0.98%</td><td class="text-end negative">-0.28</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/organizational-management</td><td class="text-end">457</td><td class="text-end">511</td><td class="text-end">+54</td><td class="text-end">5</td><td class="text-end">9</td><td class="text-end positive">+4</td><td class="text-end">1.44%</td><td class="text-end">1.94%</td><td class="text-end positive">+0.50</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/project-management</td><td class="text-end">488</td><td class="text-end">565</td><td class="text-end">+77</td><td class="text-end">8</td><td class="text-end">16</td><td class="text-end positive">+8</td><td class="text-end">2.78%</td><td class="text-end">2.66%</td><td class="text-end negative">-0.11</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/psychology</td><td class="text-end">980</td><td class="text-end">1,219</td><td class="text-end">+239</td><td class="text-end">19</td><td class="text-end">45</td><td class="text-end positive">+26</td><td class="text-end">3.19%</td><td class="text-end">3.29%</td><td class="text-end positive">+0.11</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/bachelors/sociology</td><td class="text-end">154</td><td class="text-end">214</td><td class="text-end">+60</td><td class="text-end">4</td><td class="text-end">3</td><td class="text-end negative">-1</td><td class="text-end">3.81%</td><td class="text-end">1.24%</td><td class="text-end negative">-2.57</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/business</td><td class="text-end">2,601</td><td class="text-end">2,577</td><td class="text-end">-24</td><td class="text-end">35</td><td class="text-end">26</td><td class="text-end negative">-9</td><td class="text-end">2.95%</td><td class="text-end">1.50%</td><td class="text-end negative">-1.45</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/certificates/post-baccalaureate-teaching</td><td class="text-end">199</td><td class="text-end">184</td><td class="text-end">-15</td><td class="text-end">3</td><td class="text-end">2</td><td class="text-end negative">-1</td><td class="text-end">2.13%</td><td class="text-end">1.21%</td><td class="text-end negative">-0.92</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/criminal-justice</td><td class="text-end">687</td><td class="text-end">714</td><td class="text-end">+27</td><td class="text-end">11</td><td class="text-end">8</td><td class="text-end negative">-3</td><td class="text-end">2.67%</td><td class="text-end">1.38%</td><td class="text-end negative">-1.30</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/education</td><td class="text-end">1,029</td><td class="text-end">860</td><td class="text-end">-169</td><td class="text-end">17</td><td class="text-end">16</td><td class="text-end negative">-1</td><td class="text-end">2.88%</td><td class="text-end">1.78%</td><td class="text-end negative">-1.11</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/health-care</td><td class="text-end">1,184</td><td class="text-end">1,275</td><td class="text-end">+91</td><td class="text-end">10</td><td class="text-end">7</td><td class="text-end negative">-3</td><td class="text-end">1.68%</td><td class="text-end">0.63%</td><td class="text-end negative">-1.05</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/information-technology</td><td class="text-end">1,134</td><td class="text-end">1,114</td><td class="text-end">-20</td><td class="text-end">16</td><td class="text-end">13</td><td class="text-end negative">-3</td><td class="text-end">2.61%</td><td class="text-end">1.28%</td><td class="text-end negative">-1.33</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/liberal-arts</td><td class="text-end">234</td><td class="text-end">211</td><td class="text-end">-23</td><td class="text-end">5</td><td class="text-end">2</td><td class="text-end negative">-3</td><td class="text-end">2.92%</td><td class="text-end">1.03%</td><td class="text-end negative">-1.89</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/accounting</td><td class="text-end">180</td><td class="text-end">191</td><td class="text-end">+11</td><td class="text-end">3</td><td class="text-end">1</td><td class="text-end negative">-2</td><td class="text-end">2.91%</td><td class="text-end">0.69%</td><td class="text-end negative">-2.22</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/business-administration</td><td class="text-end">1,626</td><td class="text-end">1,710</td><td class="text-end">+84</td><td class="text-end">18</td><td class="text-end">24</td><td class="text-end positive">+6</td><td class="text-end">1.99%</td><td class="text-end">1.72%</td><td class="text-end negative">-0.27</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/criminal-justice</td><td class="text-end">256</td><td class="text-end">240</td><td class="text-end">-16</td><td class="text-end">4</td><td class="text-end">3</td><td class="text-end negative">-1</td><td class="text-end">2.61%</td><td class="text-end">1.02%</td><td class="text-end negative">-1.60</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/early-childhood-education-leadership</td><td class="text-end">271</td><td class="text-end">317</td><td class="text-end">+46</td><td class="text-end">4</td><td class="text-end">5</td><td class="text-end positive">+1</td><td class="text-end">3.51%</td><td class="text-end">2.79%</td><td class="text-end negative">-0.72</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/education</td><td class="text-end">280</td><td class="text-end">331</td><td class="text-end">+51</td><td class="text-end">8</td><td class="text-end">4</td><td class="text-end negative">-4</td><td class="text-end">3.98%</td><td class="text-end">1.14%</td><td class="text-end negative">-2.84</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/finance</td><td class="text-end">182</td><td class="text-end">245</td><td class="text-end">+63</td><td class="text-end">2</td><td class="text-end">3</td><td class="text-end positive">+1</td><td class="text-end">1.69%</td><td class="text-end">1.47%</td><td class="text-end negative">-0.22</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/health-care-administration</td><td class="text-end">365</td><td class="text-end">440</td><td class="text-end">+75</td><td class="text-end">2</td><td class="text-end">16</td><td class="text-end positive">+14</td><td class="text-end">0.93%</td><td class="text-end">2.75%</td><td class="text-end positive">+1.82</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/masters/health-informatics-analytics</td><td class="text-end">363</td><td class="text-end">494</td><td class="text-end">+131</td><td class="text-end">1</td><td class="text-end">12</td><td class="text-end positive">+11</td><td class="text-end">0.46%</td><td class="text-end">2.53%</td><td class="text-end positive">+2.07</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/masters/human-resource-management</td><td class="text-end">278</td><td class="text-end">411</td><td class="text-end">+133</td><td class="text-end">1</td><td class="text-end">3</td><td class="text-end positive">+2</td><td class="text-end">0.61%</td><td class="text-end">0.95%</td><td class="text-end positive">+0.34</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/masters/human-services</td><td class="text-end">389</td><td class="text-end">387</td><td class="text-end">-2</td><td class="text-end">6</td><td class="text-end">6</td><td class="text-end neutral">+0</td><td class="text-end">2.97%</td><td class="text-end">1.64%</td><td class="text-end negative">-1.33</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/information-systems-management</td><td class="text-end">446</td><td class="text-end">508</td><td class="text-end">+62</td><td class="text-end">1</td><td class="text-end">1</td><td class="text-end neutral">+0</td><td class="text-end">0.46%</td><td class="text-end">0.27%</td><td class="text-end negative">-0.18</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/instructional-design-technology</td><td class="text-end">187</td><td class="text-end">159</td><td class="text-end">-28</td><td class="text-end">3</td><td class="text-end">6</td><td class="text-end positive">+3</td><td class="text-end">3.16%</td><td class="text-end">0.80%</td><td class="text-end negative">-2.36</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/organizational-management</td><td class="text-end">676</td><td class="text-end">936</td><td class="text-end">+260</td><td class="text-end">5</td><td class="text-end">8</td><td class="text-end positive">+3</td><td class="text-end">1.33%</td><td class="text-end">1.39%</td><td class="text-end positive">+0.07</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/masters/psychology</td><td class="text-end">986</td><td class="text-end">739</td><td class="text-end">-247</td><td class="text-end">19</td><td class="text-end">15</td><td class="text-end negative">-4</td><td class="text-end">3.10%</td><td class="text-end">1.68%</td><td class="text-end negative">-1.43</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/public-health</td><td class="text-end">284</td><td class="text-end">326</td><td class="text-end">+42</td><td class="text-end">4</td><td class="text-end">2</td><td class="text-end negative">-2</td><td class="text-end">2.29%</td><td class="text-end">0.88%</td><td class="text-end negative">-1.40</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/special-education</td><td class="text-end">132</td><td class="text-end">139</td><td class="text-end">+7</td><td class="text-end">3</td><td class="text-end">2</td><td class="text-end negative">-1</td><td class="text-end">3.90%</td><td class="text-end">1.85%</td><td class="text-end negative">-2.04</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                     <tr><td>/online-degrees/masters/technology-management</td><td class="text-end">395</td><td class="text-end">576</td><td class="text-end">+181</td><td class="text-end">3</td><td class="text-end">6</td><td class="text-end positive">+3</td><td class="text-end">1.35%</td><td class="text-end">1.49%</td><td class="text-end positive">+0.15</td><td class="text-center"><span class="badge bg-success">Win</span></td></tr>
+                                     <tr><td>/online-degrees/social-behavioral-science</td><td class="text-end">1,178</td><td class="text-end">1,194</td><td class="text-end">+16</td><td class="text-end">19</td><td class="text-end">25</td><td class="text-end positive">+6</td><td class="text-end">2.67%</td><td class="text-end">1.68%</td><td class="text-end negative">-0.99</td><td class="text-center"><span class="badge bg-danger">Loss</span></td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                     
+                     <div class="mt-3 p-3 bg-light rounded">
+                         <div class="row text-center">
+                             <div class="col-md-3">
+                                 <div class="fw-bold text-success fs-4">30</div>
+                                 <div class="small text-muted">Pages Improved</div>
+                             </div>
+                             <div class="col-md-3">
+                                 <div class="fw-bold text-danger fs-4">27</div>
+                                 <div class="small text-muted">Pages Declined</div>
+                             </div>
+                             <div class="col-md-3">
+                                 <div class="fw-bold text-primary fs-4">+2.07pp</div>
+                                 <div class="small text-muted">Best Improvement</div>
+                             </div>
+                             <div class="col-md-3">
+                                 <div class="fw-bold text-warning fs-4">52.6%</div>
+                                 <div class="small text-muted">Success Rate</div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </section>
+     </div>
+ </main>
+
+<footer role="contentinfo" class="bg-light py-4 mt-5 border-top">
+    <div class="container text-center">
+        <p class="mb-0 text-muted small">
+            <strong>UAGC RFI Conversion Analysis Report</strong> | 
+            Generated on: <time datetime="2025-08-06">August 6, 2025</time>
+        </p>
+    </div>
+</footer>
+
+<!-- Bootstrap 5.3 JavaScript Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<script>
+// Add smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Add scroll animations
+function addScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.enhanced-card, .content-section, .kpi-card').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Initialize animations
+addScrollAnimations();
+
+// Handle "Show Full Data" button text toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.querySelector('[data-bs-target="#fullDataTable"]');
+    const collapseElement = document.getElementById('fullDataTable');
+    
+    if (toggleBtn && collapseElement) {
+        collapseElement.addEventListener('show.bs.collapse', function() {
+            toggleBtn.innerHTML = '<i class="bi bi-table me-2"></i>Hide Full Data';
+        });
+        
+        collapseElement.addEventListener('hide.bs.collapse', function() {
+            toggleBtn.innerHTML = '<i class="bi bi-table me-2"></i>Show Full Data';
+        });
+    }
+});
+</script>
+</body>
+</html>
