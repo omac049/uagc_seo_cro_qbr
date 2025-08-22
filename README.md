@@ -11,7 +11,9 @@ A comprehensive quarterly business review presentation showcasing the full impac
 
 ## 🎯 View the Presentation
 
-**Live Demo**: [GitHub Pages URL will be available after deployment]
+**Live Demo**: https://omac049.github.io/uagc_seo_cro_qbr/
+
+> 📍 **Note**: Enable GitHub Pages in your repository settings to activate the live demo.
 
 ## 📁 Contents
 
