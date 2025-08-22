@@ -135,6 +135,9 @@ if (typeof Chart === 'undefined') {
     /* Typography */
     --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
     --font-secondary: 'Roboto', sans-serif;
+    
+    /* Background Image Opacity - Change this value to adjust hero image transparency (0.1 = very transparent, 0.9 = very opaque) */
+    --hero-bg-opacity: 0.65;
 }
 
 body {
@@ -147,7 +150,11 @@ body {
 
 /* Executive Hero Section */
 .executive-hero {
-    background: var(--arizona-blue);
+    background: 
+        linear-gradient(rgba(12, 35, 75, 0.2), rgba(12, 35, 75, 0.15)),
+        url('./bg-image.png') center center;
+    background-size: cover;
+    background-attachment: fixed;
     color: white;
     min-height: 100vh;
     display: flex;
@@ -156,23 +163,174 @@ body {
     overflow: hidden;
 }
 
-.executive-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" fill="rgba(255,255,255,0.05)"><polygon points="0,0 1000,0 1000,150 0,300"/></svg>');
-    background-size: cover;
-    z-index: 1;
+/* 
+Z-Index Hierarchy for Hero Section:
+- Background elements: -2 to -1
+- Gradient overlay: 1
+- Hero content container: 100
+- KPI showcase grid: 115
+- Hero summary: 115
+- KPI cards: 118
+- Main metric: 120
+- Title section: 110
+- Text elements: 125-135
+*/
+
+/* Remove any animation from hero to keep background stable */
+
+@keyframes backgroundShift {
+    0%, 100% { 
+        transform: scale(1.08) translate(0, 0);
+        filter: contrast(1.1) brightness(1.05) saturate(1.1);
+    }
+    25% { 
+        transform: scale(1.12) translate(-8px, -3px);
+        filter: contrast(1.15) brightness(1.1) saturate(1.15);
+    }
+    50% { 
+        transform: scale(1.10) translate(4px, -8px);
+        filter: contrast(1.12) brightness(1.08) saturate(1.12);
+    }
+    75% { 
+        transform: scale(1.11) translate(-4px, 4px);
+        filter: contrast(1.13) brightness(1.09) saturate(1.13);
+    }
 }
 
-/* UAGC Logo Styling */
+
+
+
+
+
+
+/* Floating Geometric Elements - Minimal for clarity */
+.executive-hero .floating-elements {
+    display: none; /* Removed for cleaner design */
+}
+
+.floating-elements::before,
+.floating-elements::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 20s linear infinite;
+}
+
+.floating-elements::before {
+    width: 200px;
+    height: 200px;
+    top: 20%;
+    right: 10%;
+    animation-delay: -5s;
+    background: radial-gradient(circle, rgba(129, 211, 235, 0.2) 0%, transparent 70%);
+}
+
+.floating-elements::after {
+    width: 150px;
+    height: 150px;
+    bottom: 30%;
+    left: 15%;
+    animation-delay: -10s;
+    background: radial-gradient(circle, rgba(239, 150, 0, 0.15) 0%, transparent 70%);
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1);
+        opacity: 0.25;
+    }
+    33% { 
+        transform: translateY(-20px) rotate(60deg) scale(1.05);
+        opacity: 0.4;
+    }
+    66% { 
+        transform: translateY(-35px) rotate(120deg) scale(0.95);
+        opacity: 0.5;
+    }
+    100% { 
+        transform: translateY(0px) rotate(180deg) scale(1);
+        opacity: 0.25;
+    }
+}
+
+/* Particle Effect - Removed for clean design */
+.executive-hero .particles {
+    display: none; /* Removed for cleaner, more professional appearance */
+}
+
+@keyframes particleMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-200px, -100px); }
+}
+
+/* Glow Effects - Removed for cleaner design */
+/* .executive-hero .glow-orbs styles removed since element no longer used */
+
+@keyframes orbitGlow {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.4;
+    }
+    25% { 
+        transform: translate(20px, -20px) scale(1.1);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translate(-10px, 10px) scale(0.9);
+        opacity: 0.3;
+    }
+    75% { 
+        transform: translate(15px, 25px) scale(1.05);
+        opacity: 0.5;
+    }
+}
+
+/* Enhanced Text Readability - High Contrast Text Shadows */
+.text-shadow-strong {
+    text-shadow: 
+        0 0 30px rgba(0, 0, 0, 0.9),
+        3px 3px 15px rgba(0, 0, 0, 0.8), 
+        2px 2px 8px rgba(0, 0, 0, 0.7),
+        1px 1px 4px rgba(0, 0, 0, 0.6),
+        0 0 15px rgba(12, 35, 75, 0.8) !important;
+}
+
+.text-shadow {
+    text-shadow: 
+        0 0 20px rgba(0, 0, 0, 0.8),
+        2px 2px 10px rgba(0, 0, 0, 0.7), 
+        1px 1px 5px rgba(0, 0, 0, 0.6),
+        0 0 10px rgba(12, 35, 75, 0.6) !important;
+}
+
+/* Hero Text Enhancement */
+.hero-header h1, .hero-header h2 {
+    text-shadow: 
+        0 0 30px rgba(0, 0, 0, 0.9),
+        3px 3px 15px rgba(0, 0, 0, 0.8), 
+        2px 2px 8px rgba(0, 0, 0, 0.7),
+        1px 1px 4px rgba(0, 0, 0, 0.6),
+        0 0 15px rgba(12, 35, 75, 0.8);
+    font-weight: 700 !important;
+    color: #ffffff !important;
+}
+
+/* White text enhancement for all white text elements - Front Layer */
+.text-white, .hero-main-content .text-white {
+    text-shadow: 
+        0 0 20px rgba(0, 0, 0, 0.8),
+        2px 2px 10px rgba(0, 0, 0, 0.7), 
+        1px 1px 5px rgba(0, 0, 0, 0.6) !important;
+    position: relative;
+    z-index: 125;
+}
+
+/* UAGC Logo Styling - Front Layer */
 .uagc-logo {
     display: inline-block;
     position: relative;
-    z-index: 2;
+    z-index: 125;
 }
 
 .uagc-logo img {
@@ -192,7 +350,18 @@ body {
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 125;
+}
+
+/* Ensure all hero text and elements are on front layer */
+.hero-title-section h1,
+.hero-title-section h2,
+.hero-main-metric *,
+.executive-kpi-modern *,
+.hero-summary-bottom *,
+.hero-divider {
+    position: relative;
+    z-index: 130;
 }
 
 /* Professional Slides */
@@ -232,9 +401,9 @@ body {
 
 /* Executive KPI Cards */
 .executive-kpi {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.9);
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
@@ -339,38 +508,339 @@ body {
     transition: width 1s ease-out;
 }
 
-/* Navigation */
+/* Floating Condensed Navigation */
 .qbr-nav {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 1000;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    border-radius: 50px;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(12, 35, 75, 0.15);
+    box-shadow: 0 8px 32px rgba(12, 35, 75, 0.12);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 60px;
+    max-height: 85vh;
+    overflow: visible;
+    cursor: pointer;
+}
+
+/* Condensed state (default) */
+.qbr-nav.condensed {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.qbr-nav.condensed .nav-content {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.qbr-nav.condensed .nav-hamburger {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+/* Expanded state */
+.qbr-nav.expanded {
+    width: 280px;
+    border-radius: 20px;
+    padding: 1.5rem;
+    height: auto;
+}
+
+.qbr-nav.expanded .nav-content {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    pointer-events: all;
+}
+
+.qbr-nav.expanded .nav-hamburger {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+}
+
+/* Hamburger menu icon */
+.nav-hamburger {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+}
+
+.nav-hamburger span {
+    width: 100%;
+    height: 3px;
+    background: var(--arizona-blue);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+/* Hamburger animation when expanded */
+.qbr-nav.expanded .nav-hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.qbr-nav.expanded .nav-hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.qbr-nav.expanded .nav-hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Hover effects */
+.qbr-nav.condensed:hover {
+    background: rgba(12, 35, 75, 0.95);
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(12, 35, 75, 0.2);
+}
+
+.qbr-nav.condensed:hover .nav-hamburger span {
+    background: white;
+}
+
+.qbr-nav.expanded:hover .nav-hamburger span {
+    background: var(--arizona-blue);
+}
+
+.qbr-nav.expanded:hover {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 12px 40px rgba(12, 35, 75, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Navigation content wrapper */
+.nav-content {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+/* Quick access indicator */
+.nav-quick-indicator {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--arizona-blue);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     border-radius: 12px;
-    padding: 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: var(--card-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.qbr-nav.condensed:hover .nav-quick-indicator {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* Focus states for accessibility */
+.nav-toggle-btn:focus {
+    outline: 3px solid var(--highlight-sky);
+    outline-offset: 2px;
+}
+
+.qbr-nav a:focus {
+    outline: 2px solid var(--highlight-sky);
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+/* Smooth animations */
+.qbr-nav, .nav-content, .nav-toggle-btn {
+    will-change: transform, opacity;
+}
+
+/* Loading state for navigation */
+.nav-loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Navigation Header Styling */
+.nav-header {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(12, 35, 75, 0.1);
+    margin-bottom: 0.75rem !important;
+}
+
+.nav-header h6 {
+    color: var(--arizona-blue) !important;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* Enhanced Navigation Links */
+.qbr-nav a {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+}
+
+.qbr-nav a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.qbr-nav a:hover::after {
+    left: 100%;
+}
+
+.qbr-nav a:hover {
+    border-color: rgba(12, 35, 75, 0.1);
+    background: rgba(12, 35, 75, 0.05);
+}
+
+/* Active state enhancement */
+.qbr-nav a.active {
+    background: linear-gradient(135deg, var(--arizona-blue), var(--highlight-sky));
+    color: white !important;
+    border-color: var(--arizona-blue);
+    box-shadow: 0 4px 12px rgba(12, 35, 75, 0.2);
+}
+
+.qbr-nav a.active i {
+    color: white !important;
+}
+
+/* Mobile touch improvements */
+@media (hover: none) {
+    .qbr-nav a:hover::after {
+        display: none;
+    }
+    
+    .nav-toggle-btn:hover {
+        transform: translateY(-50%) scale(1.05);
+    }
+}
+
+.qbr-nav:hover {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 12px 40px rgba(12, 35, 75, 0.18);
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(12, 35, 75, 0.25);
+}
+
+.qbr-nav::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(135deg, var(--uagc-primary), var(--highlight-orange), var(--highlight-sky));
+    border-radius: 16px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.qbr-nav:hover::before {
+    opacity: 0.1;
 }
 
 .qbr-nav a {
     color: var(--uagc-primary);
     text-decoration: none;
-    padding: 0.7rem 1rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    display: block;
-    margin-bottom: 0.3rem;
-    font-size: 0.9rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
     font-weight: 500;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.qbr-nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(12, 35, 75, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.qbr-nav a:hover::before {
+    left: 100%;
 }
 
 .qbr-nav a:hover,
 .qbr-nav a.active {
-    background: var(--uagc-primary);
+    background: linear-gradient(135deg, var(--uagc-primary), var(--arizona-blue));
     color: white;
-    transform: translateX(3px);
+    transform: translateX(5px) scale(1.02);
+    border-color: var(--uagc-primary);
+    box-shadow: 0 4px 16px rgba(12, 35, 75, 0.25);
 }
+
+.qbr-nav a:hover i,
+.qbr-nav a.active i {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+}
+
+.qbr-nav a:last-child {
+    margin-bottom: 0;
+}
+
+.qbr-nav a i {
+    transition: all 0.3s ease;
+    margin-right: 0.75rem !important;
+    width: 18px;
+    text-align: center;
+}
+
+/* Legacy navigation header removed - using internal nav-header now */
 
 /* Strategic Cards */
 .strategic-win {
@@ -448,8 +918,66 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .executive-hero {
-        min-height: 80vh;
-        padding: 2rem 0;
+        min-height: 100vh;
+        padding: 0;
+    }
+    
+    .hero-content-container {
+        border-radius: 0;
+        padding: 1.5rem 0.5rem 2rem 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-title-section {
+        margin-bottom: 2rem;
+    }
+    
+    .hero-main-metric {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-main-metric .display-3 {
+        font-size: 2.5rem !important;
+    }
+    
+    .executive-kpi-modern {
+        min-height: 140px;
+        padding: 1.5rem 1rem;
+    }
+    
+    .kpi-value-modern {
+        font-size: 2rem;
+    }
+    
+    .kpi-icon-modern {
+        font-size: 1.5rem !important;
+    }
+    
+    .hero-metric-primary {
+        font-size: 2.5rem;
+    }
+    
+    .hero-icon-large {
+        font-size: 2rem !important;
+    }
+    
+    .hero-summary-bottom {
+        margin: 1rem 0.5rem 0 0.5rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .kpi-value-sm {
+        font-size: 1.5rem;
+    }
+    
+    .executive-kpi-compact {
+        margin-bottom: 0.75rem;
+        padding: 0.75rem;
+    }
+    
+    .ps-lg-3 {
+        padding-left: 0.5rem !important;
     }
     
     .qbr-slide {
@@ -475,6 +1003,37 @@ body {
     
     .chart-container canvas {
         max-height: 280px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-header h1 {
+        font-size: 2rem !important;
+    }
+    
+    .hero-metric-primary {
+        font-size: 2rem !important;
+    }
+    
+    .hero-icon-large {
+        font-size: 1.75rem !important;
+    }
+    
+    .kpi-value-sm {
+        font-size: 1.25rem;
+    }
+    
+    .hero-summary-bottom {
+        margin: 0.75rem 0.25rem 0 0.25rem;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .executive-kpi-compact {
+        padding: 0.5rem;
+    }
+    
+    .hero-content-container {
+        padding: 0.5rem 0.25rem 1rem 0.25rem;
     }
 }
 
@@ -514,6 +1073,908 @@ body {
     padding: 2rem;
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Modern Clean Hero Layout - Top Layer */
+.hero-content-container {
+    position: relative;
+    z-index: 100;
+    background: linear-gradient(180deg, 
+        rgba(12, 35, 75, 0.9) 0%, 
+        rgba(12, 35, 75, 0.7) 50%, 
+        rgba(12, 35, 75, 0.4) 100%
+    );
+    backdrop-filter: blur(12px);
+    border-radius: 0 0 32px 32px;
+    padding: 2rem 0 3rem 0;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Clean Hero Title Section - Front Layer */
+.hero-title-section {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 110;
+}
+
+/* Main Metric Showcase - Front Layer */
+.hero-main-metric {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    margin: 0 auto 3rem;
+    max-width: 600px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 120;
+    overflow: hidden;
+}
+
+.hero-main-metric::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--arizona-blue), 
+        var(--highlight-sky), 
+        var(--highlight-orange), 
+        var(--arizona-red)
+    );
+    background-size: 300% 100%;
+    animation: borderFlow 6s ease-in-out infinite;
+}
+
+.hero-main-metric:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Supporting KPIs Grid - Front Layer */
+.hero-kpi-showcase {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 115;
+}
+
+.hero-header {
+    animation: headerFadeIn 1.5s ease-out 0.2s both;
+    position: relative;
+    z-index: 125;
+}
+
+.hero-highlight-large {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border: 3px solid rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    animation: highlightSlideIn 1.8s ease-out 0.8s both;
+    color: #212529 !important;
+}
+
+.hero-highlight-large::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        var(--arizona-blue), 
+        var(--highlight-sky), 
+        var(--highlight-orange), 
+        var(--arizona-red),
+        var(--arizona-blue)
+    );
+    background-size: 300% 100%;
+    animation: borderFlow 6s ease-in-out infinite;
+}
+
+.hero-highlight-large:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(255, 255, 255, 1);
+}
+
+.hero-metric-primary {
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+    animation: metricScale 2.5s ease-out 1.2s both;
+    color: var(--arizona-blue) !important;
+    font-weight: 800;
+}
+
+.hero-metric-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #495057 !important;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.hero-icon-large {
+    font-size: 2.5rem !important;
+    animation: iconFloat 2s ease-out 1s both;
+    color: var(--arizona-blue) !important;
+}
+
+.hero-context-large {
+    font-size: 0.85rem;
+    color: #495057 !important;
+    font-weight: 500;
+    animation: contextSlideIn 1.5s ease-out 1.5s both;
+}
+
+.hero-description {
+    animation: descriptionFadeIn 1.5s ease-out 1.8s both;
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+.hero-kpi-grid {
+    animation: gridSlideIn 1.5s ease-out 1.4s both;
+}
+
+.hero-summary-bottom {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    color: #212529;
+    transition: all 0.4s ease;
+    animation: summaryFadeIn 1.5s ease-out 2.2s both;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 115;
+}
+
+.hero-summary-bottom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.98);
+}
+
+/* Hero Animations */
+@keyframes headerFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes highlightSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(80px) scale(0.8);
+        filter: blur(20px);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1.05);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes metricScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotateY(90deg);
+        filter: blur(20px);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.1) rotateY(0deg);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+        filter: blur(0);
+    }
+}
+
+@keyframes iconFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(-40px) rotate(-30deg) scale(0.5);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(5px) rotate(5deg) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+}
+
+@keyframes contextSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-40px);
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 0.85;
+        transform: translateX(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes descriptionFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes gridSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(60px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes summaryFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes borderFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Text Shadows for Better Readability */
+.text-shadow {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-strong {
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Hero Highlight Section */
+.hero-highlight {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    animation: heroHighlightPulse 4s ease-in-out infinite;
+}
+
+.hero-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+    z-index: 0;
+}
+
+.hero-highlight:hover::before {
+    left: 100%;
+}
+
+.hero-highlight:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.hero-highlight > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes heroHighlightPulse {
+    0%, 100% { 
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 rgba(255, 255, 255, 0.3);
+    }
+    50% { 
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 0 20px rgba(255, 255, 255, 0.4);
+    }
+}
+
+/* Enhanced Content Animations */
+.hero-content h1 {
+    animation: titleFadeIn 1.2s ease-out 0.3s both;
+}
+
+.hero-content h2 {
+    animation: titleFadeIn 1.2s ease-out 0.6s both;
+}
+
+.hero-content p {
+    animation: titleFadeIn 1.2s ease-out 0.9s both;
+}
+
+.hero-highlight {
+    animation: titleFadeIn 1.2s ease-out 1.2s both, heroHighlightPulse 4s ease-in-out infinite 2s;
+}
+
+@keyframes titleFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) translateX(-20px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+        filter: blur(0);
+    }
+}
+
+/* Advanced Text Effects */
+.hero-content h1 span {
+    display: inline-block;
+    background: linear-gradient(45deg, #EF9600, #FFD700, #EF9600);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textGradientShift 3s ease-in-out infinite;
+}
+
+@keyframes textGradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Enhanced Modern KPI Cards - Front Layer */
+.executive-kpi-modern {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 118;
+    overflow: hidden;
+    animation: kpiCardFadeIn 1s ease-out both;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Keep compact for backwards compatibility - Front Layer */
+.executive-kpi-compact {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(18px);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 118;
+    overflow: hidden;
+    animation: kpiCardFadeIn 1s ease-out both;
+}
+
+/* Modern KPI card animations */
+.executive-kpi-modern:nth-child(1) { animation-delay: 1.2s; }
+.executive-kpi-modern:nth-child(2) { animation-delay: 1.4s; }
+.executive-kpi-modern:nth-child(3) { animation-delay: 1.6s; }
+
+.executive-kpi-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--arizona-blue), 
+        var(--highlight-sky), 
+        var(--highlight-orange), 
+        var(--arizona-red)
+    );
+    background-size: 300% 100%;
+    animation: borderGlow 6s ease-in-out infinite;
+    z-index: 0;
+}
+
+.executive-kpi-modern:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 1);
+}
+
+.executive-kpi-modern > * {
+    position: relative;
+    z-index: 135;
+}
+
+.executive-kpi-compact > * {
+    position: relative;
+    z-index: 135;
+}
+
+/* Legacy animations */
+.executive-kpi-compact:nth-child(1) { animation-delay: 1.5s; }
+.executive-kpi-compact:nth-child(2) { animation-delay: 1.7s; }
+.executive-kpi-compact:nth-child(3) { animation-delay: 1.9s; }
+
+.executive-kpi-compact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        var(--arizona-blue), 
+        var(--highlight-sky), 
+        var(--highlight-orange), 
+        var(--arizona-red)
+    );
+    background-size: 300% 100%;
+    animation: borderGlow 4s ease-in-out infinite;
+    z-index: 0;
+}
+
+.executive-kpi-compact::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.8s ease;
+    z-index: 0;
+}
+
+.executive-kpi-compact:hover::after {
+    left: 100%;
+}
+
+.executive-kpi-compact:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.98);
+}
+
+.executive-kpi-compact > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes kpiCardFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) rotateX(30deg);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+        filter: blur(0);
+    }
+}
+
+@keyframes borderGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Enhanced KPI Value Animation */
+.kpi-value-sm {
+    animation: valueCountUp 2s ease-out 2s both;
+    position: relative;
+}
+
+.kpi-value-sm::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    animation: underlineExpand 1s ease-out 2.5s both;
+}
+
+@keyframes valueCountUp {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+        filter: blur(10px);
+    }
+    70% {
+        transform: scale(1.1);
+        opacity: 1;
+        filter: blur(0);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes underlineExpand {
+    0% { width: 0; }
+    100% { width: 40%; }
+}
+
+/* Modern KPI Typography */
+.kpi-value-modern {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0.75rem 0;
+    font-family: var(--font-secondary);
+}
+
+.kpi-label-modern {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.kpi-context-modern {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.kpi-icon-modern {
+    font-size: 2rem !important;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+/* Keep existing smaller typography */
+.kpi-value-sm {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0.5rem 0;
+    font-family: var(--font-secondary);
+}
+
+.kpi-label-sm {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: #495057;
+    margin-bottom: 0.25rem;
+}
+
+.kpi-context-sm {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Bottom Executive Summary */
+.executive-summary-bottom {
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 0 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    color: #212529;
+    position: relative;
+    overflow: hidden;
+    animation: summarySlideUp 1.5s ease-out 2.5s both;
+    transition: all 0.4s ease;
+}
+
+.executive-summary-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        var(--arizona-blue) 0%, 
+        var(--highlight-sky) 25%, 
+        var(--highlight-orange) 50%, 
+        var(--arizona-red) 75%, 
+        var(--arizona-blue) 100%
+    );
+    background-size: 300% 100%;
+    animation: summaryBorderFlow 8s ease-in-out infinite;
+}
+
+.executive-summary-bottom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.98);
+}
+
+@keyframes summarySlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes summaryBorderFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Logo Animation Enhancement */
+.uagc-logo {
+    animation: logoFadeIn 1.5s ease-out 0.1s both;
+}
+
+.uagc-logo img {
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.uagc-logo:hover img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4)) brightness(1.1);
+}
+
+@keyframes logoFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.8);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Hero Divider Enhancement */
+.hero-divider {
+    background: linear-gradient(90deg, 
+        var(--highlight-orange), 
+        #FFD700, 
+        var(--highlight-orange)
+    );
+    background-size: 200% 100%;
+    animation: dividerGlow 3s ease-in-out infinite, titleFadeIn 1s ease-out 0.4s both;
+    box-shadow: 0 2px 10px rgba(239, 150, 0, 0.4);
+    position: relative;
+}
+
+.hero-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: dividerPulse 2s ease-in-out infinite 1s;
+}
+
+@keyframes dividerGlow {
+    0%, 100% { 
+        background-position: 0% 50%;
+        box-shadow: 0 2px 10px rgba(239, 150, 0, 0.4);
+    }
+    50% { 
+        background-position: 100% 50%;
+        box-shadow: 0 4px 20px rgba(239, 150, 0, 0.8);
+    }
+}
+
+@keyframes dividerPulse {
+    0%, 100% { 
+        width: 0; 
+        height: 0; 
+        opacity: 0; 
+    }
+    50% { 
+        width: 20px; 
+        height: 20px; 
+        opacity: 0.6; 
+    }
+}
+
+/* Hero Metric Special Effects */
+.hero-metric-value {
+    animation: metricFadeIn 2s ease-out 1.5s both;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.hero-metric-value:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 20px rgba(40, 167, 69, 0.6);
+    animation: metricPulse 1s ease-in-out infinite;
+}
+
+.hero-icon-animated {
+    animation: iconBounce 2s ease-out 1.3s both;
+    transition: all 0.4s ease;
+}
+
+.hero-icon-animated:hover {
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 0 15px rgba(40, 167, 69, 0.6));
+}
+
+.hero-context {
+    animation: contextFadeIn 1.5s ease-out 2s both;
+}
+
+@keyframes metricFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotateY(90deg);
+        filter: blur(20px);
+    }
+    70% {
+        transform: scale(1.1) rotateY(0deg);
+        opacity: 1;
+        filter: blur(0);
+    }
+    100% {
+        transform: scale(1) rotateY(0deg);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes metricPulse {
+    0%, 100% { transform: scale(1.1); }
+    50% { transform: scale(1.15); }
+}
+
+@keyframes iconBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) rotate(-45deg) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(10px) rotate(0deg) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+}
+
+@keyframes contextFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 0.75;
+        transform: translateX(0);
+        filter: blur(0);
+    }
+}
+
+/* Performance Optimization for Animations */
+.executive-hero * {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .executive-hero *,
+    .hero-highlight,
+    .executive-kpi-compact,
+    .hero-metric-value,
+    .hero-icon-animated {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .floating-elements,
+    .particles,
+    .glow-orbs {
+        animation: none !important;
+    }
+}
+
+/* Hero Content Positioning is already defined above */
+
+/* Responsive Spacing */
+.ps-xl-6 {
+    padding-left: 4rem !important;
+}
+
+.pe-xl-5 {
+    padding-right: 3rem !important;
 }
 
 /* UAGC Bootstrap Color Overrides */
@@ -568,108 +2029,430 @@ footer {
         border: 1px solid #ccc;
     }
 }
+
+/* Enhanced Responsive Design */
+@media (max-width: 1400px) {
+    .qbr-nav {
+        min-width: 230px;
+        padding: 1.1rem;
+    }
+    
+    .qbr-nav a {
+        padding: 0.85rem 1.1rem;
+        font-size: 0.93rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .qbr-nav {
+        min-width: 220px;
+        padding: 1rem;
+    }
+    
+    .qbr-nav a {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .executive-hero {
+        background-position: center 35%;
+    }
+}
+
+@media (max-width: 992px) {
+    .qbr-nav {
+        top: 15px;
+        right: 15px;
+        min-width: 200px;
+        padding: 0.9rem;
+    }
+    
+    .qbr-nav::after {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.6rem;
+    }
+    
+    .executive-hero {
+        background-position: center 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .executive-hero {
+        min-height: 100vh;
+        padding: 1rem 0;
+    }
+    
+    .executive-hero {
+        background-position: center 25%;
+    }
+    
+    .qbr-slide {
+        margin: 1.5rem 0;
+    }
+    
+    .slide-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    /* Mobile Navigation Enhancements */
+    .qbr-nav {
+        top: 15px;
+        right: 15px;
+        max-width: calc(100vw - 30px);
+    }
+    
+    .qbr-nav.condensed {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .qbr-nav.expanded {
+        width: calc(100vw - 30px);
+        max-width: 320px;
+        border-radius: 16px;
+        padding: 1.25rem;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .nav-hamburger {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .nav-hamburger span {
+        height: 2px;
+    }
+    
+    .qbr-nav .nav-content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .qbr-nav a {
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        white-space: nowrap;
+    }
+    
+    .qbr-nav a:hover,
+    .qbr-nav a.active {
+        transform: translateX(3px);
+    }
+    
+    .nav-quick-indicator {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.5rem;
+    }
+    
+    .nav-header h6 {
+        font-size: 0.9rem;
+    }
+    
+    .kpi-value {
+        font-size: 2.5rem !important;
+    }
+    
+    .chart-container {
+        min-height: 350px;
+        padding: 1rem;
+    }
+    
+    .chart-container canvas {
+        max-height: 280px !important;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem !important;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.6), 0 1px 4px rgba(255,255,255,0.2) !important;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.3rem !important;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.5) !important;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem !important;
+        max-width: 100% !important;
+    }
+    
+    .uagc-logo img {
+        height: 60px !important;
+        filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)) !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .executive-hero {
+        min-height: 100vh;
+        padding: 0.5rem 0;
+    }
+    
+    .executive-hero {
+        background-position: center 20%;
+    }
+    
+    .hero-content-container {
+        padding: 1rem 0.25rem 1.5rem 0.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-title-section {
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    .hero-title-section h1 {
+        font-size: 1.8rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .hero-title-section h2 {
+        font-size: 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .hero-main-metric {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .hero-main-metric .display-3 {
+        font-size: 2rem !important;
+    }
+    
+    .hero-main-metric .h5 {
+        font-size: 1rem !important;
+    }
+    
+    .executive-kpi-modern {
+        min-height: 120px;
+        padding: 1.25rem 0.75rem;
+    }
+    
+    .kpi-value-modern {
+        font-size: 1.75rem;
+    }
+    
+    .kpi-label-modern {
+        font-size: 0.9rem;
+    }
+    
+    .kpi-icon-modern {
+        font-size: 1.25rem !important;
+        margin-bottom: 0.5rem;
+    }
+    
+    .uagc-logo img {
+        height: 50px !important;
+    }
+    
+    .executive-kpi {
+        padding: 1.5rem 1rem !important;
+        margin-bottom: 1rem;
+    }
+    
+    .kpi-value {
+        font-size: 2rem !important;
+    }
+    
+    .kpi-label {
+        font-size: 0.9rem !important;
+    }
+    
+    .qbr-nav.condensed {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .qbr-nav.expanded {
+        width: calc(100vw - 20px);
+        max-width: 300px;
+        padding: 1rem;
+    }
+    
+    .nav-hamburger {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .qbr-nav a {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .nav-header h6 {
+        font-size: 0.8rem;
+    }
+    
+    .slide-header {
+        padding: 1rem;
+    }
+    
+    .slide-header h2 {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* Ultra-wide screen optimizations */
+@media (min-width: 1920px) {
+    .qbr-nav {
+        min-width: 280px;
+        padding: 1.5rem;
+    }
+    
+    .qbr-nav a {
+        padding: 1rem 1.4rem;
+        font-size: 1rem;
+    }
+    
+    .executive-hero {
+        background-position: center 45%;
+    }
+}
 </style>
 </head>
 <body>
 
-<!-- Professional Navigation -->
-<nav class="qbr-nav">
-    <a href="#executive-overview" data-section="overview">
-        <i class="bi bi-house-door me-2"></i>Executive Summary
-    </a>
-    <a href="#business-impact" data-section="impact">
-        <i class="bi bi-graph-up me-2"></i>Business Impact
-    </a>
-    <a href="#strategic-wins" data-section="wins">
-        <i class="bi bi-trophy me-2"></i>Strategic Wins
-    </a>
-    <a href="#challenges" data-section="challenges">
-        <i class="bi bi-exclamation-triangle me-2"></i>Challenges
-    </a>
-    <a href="#recommendations" data-section="recommendations">
-        <i class="bi bi-arrow-right-circle me-2"></i>Next Steps
-    </a>
-    <a href="#appendix" data-section="appendix">
-        <i class="bi bi-database me-2"></i>Data Appendix
-    </a>
+<!-- Floating Condensed Navigation -->
+<nav class="qbr-nav condensed" id="qbrNav">
+    <!-- Quick Access Indicator -->
+    <div class="nav-quick-indicator">Navigation</div>
+    
+    <!-- Hamburger Menu Icon -->
+    <div class="nav-hamburger" id="navHamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <!-- Navigation Content -->
+    <div class="nav-content" id="navContent">
+        <div class="nav-header mb-3">
+            <h6 class="text-primary mb-0 fw-bold">
+                <i class="bi bi-compass me-2"></i>Quick Navigation
+            </h6>
+        </div>
+        <a href="#executive-overview" data-section="overview">
+            <i class="bi bi-house-door me-2"></i>Executive Summary
+        </a>
+        <a href="#business-impact" data-section="impact">
+            <i class="bi bi-graph-up me-2"></i>Business Impact
+        </a>
+        <a href="#strategic-wins" data-section="wins">
+            <i class="bi bi-trophy me-2"></i>Strategic Wins
+        </a>
+        <a href="#challenges" data-section="challenges">
+            <i class="bi bi-exclamation-triangle me-2"></i>Challenges
+        </a>
+        <a href="#recommendations" data-section="recommendations">
+            <i class="bi bi-arrow-right-circle me-2"></i>Next Steps
+        </a>
+        <a href="#appendix" data-section="appendix">
+            <i class="bi bi-database me-2"></i>Data Appendix
+        </a>
+    </div>
 </nav>
 
 <!-- Executive Hero Section -->
 <section class="executive-hero" id="executive-overview">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="hero-content text-center text-white">
-                    <div class="mb-5">
-                        <div class="uagc-logo mb-4">
-                            <img src="logo-white.png" alt="University of Arizona Global Campus" />
-                        </div>
-                        <div class="hero-divider mb-4"></div>
-                        <h1 class="display-3 fw-bold mb-3">
-                            Q4 FY26 Quarterly Business Review
-                        </h1>
-                        <h2 class="display-6 mb-4 opacity-90">
-                            RFI Conversion Strategy Full Impact Results
-                        </h2>
-                        <p class="lead fs-4 mb-5 opacity-85">
-                            Strategic optimization initiatives delivered measurable growth in student lead generation and conversion efficiency
-                        </p>
+    <!-- Visual Effect Layers -->
+    <div class="floating-elements"></div>
+    <div class="particles"></div>
+    
+    <div class="container-fluid h-100">
+        <!-- Modern Clean Hero Layout -->
+        <div class="hero-content-container">
+            <!-- Hero Title Section -->
+            <div class="hero-title-section">
+                <div class="uagc-logo mb-3">
+                    <img src="logo-white.png" alt="University of Arizona Global Campus" />
+                </div>
+                <div class="hero-divider mx-auto mb-3"></div>
+                <h1 class="display-4 fw-bold mb-2 text-shadow-strong text-white">
+                    Q4 FY26 <span class="text-warning">Quarterly Business Review</span>
+                </h1>
+                <h2 class="h4 mb-0 opacity-95 text-shadow text-white">
+                    RFI Conversion Strategy Full Impact Results
+                </h2>
+            </div>
+            
+            <!-- Main Metric Showcase -->
+            <div class="hero-main-metric">
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                    <i class="bi bi-graph-up-arrow text-success me-4" style="font-size: 3rem;"></i>
+                    <div class="text-center">
+                        <div class="display-3 fw-bold text-success mb-1">+27.7%</div>
+                        <div class="h5 text-muted fw-semibold mb-0">Lead Generation Growth</div>
                     </div>
-                    
-                    <!-- Executive KPIs -->
-                    <div class="row g-4 mb-5">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="executive-kpi">
-                                <i class="bi bi-graph-up-arrow text-success fs-1"></i>
-                                <div class="kpi-value text-success pulse-success">+27.7%</div>
-                                <div class="kpi-label">Conversion Growth</div>
-                                <div class="kpi-context">516 → 659 RFI Submissions</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="executive-kpi">
-                                <i class="bi bi-target fs-1" style="color: var(--arizona-blue);"></i>
-                                <div class="kpi-value" style="color: var(--arizona-blue);">1.94%</div>
-                                <div class="kpi-label">Conversion Rate</div>
-                                <div class="kpi-context">+0.32pp Improvement</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="executive-kpi">
-                                <i class="bi bi-speedometer2 fs-1" style="color: var(--highlight-orange);"></i>
-                                <div class="kpi-value" style="color: var(--highlight-orange);">-14%</div>
-                                <div class="kpi-label">Journey Time</div>
-                                <div class="kpi-context">Faster Conversions</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="executive-kpi">
-                                <i class="bi bi-trophy fs-1" style="color: var(--highlight-sky);"></i>
-                                <div class="kpi-value" style="color: var(--highlight-sky);">62%</div>
-                                <div class="kpi-label">Success Rate</div>
-                                <div class="kpi-context">36/58 Pages Improved</div>
-                            </div>
+                </div>
+                <div class="text-center">
+                    <div class="h6 text-primary mb-2">516 → 659 monthly RFI submissions</div>
+                    <p class="mb-0 text-muted">
+                        Strategic optimization initiatives delivered measurable growth in student lead generation and conversion efficiency
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Supporting KPIs Grid -->
+            <div class="hero-kpi-showcase">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="executive-kpi-modern">
+                            <i class="bi bi-target kpi-icon-modern" style="color: var(--arizona-blue);"></i>
+                            <div class="kpi-value-modern" style="color: var(--arizona-blue);">1.94%</div>
+                            <div class="kpi-label-modern">Conversion Rate</div>
+                            <div class="kpi-context-modern">+0.32 percentage points</div>
                         </div>
                     </div>
-                    
-                    <!-- Executive Summary -->
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="executive-summary text-dark">
-                                <h4 class="mb-3" style="color: var(--arizona-blue);">Executive Summary</h4>
-                                <p class="mb-0 fs-5">
-                                    Our Q4 FY26 RFI optimization strategy achieved its primary objectives, delivering a <strong class="text-success">27.7% increase in lead generation</strong> 
-                                    (516 → 659 monthly RFI submissions) while improving user experience efficiency. However, with massive SEO visibility waste 
-                                    (<strong>45.7M impressions, 0.056% CTR</strong>), this foundation win sets the stage for transformational growth through 
-                                    comprehensive <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/seo-cro-audit-uagc.html" target="_blank" class="fw-bold text-decoration-none" style="color: var(--arizona-blue);">SEO recovery</a>, <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/cookie/UAGC-cookie-personalization.html" target="_blank" class="fw-bold text-decoration-none" style="color: var(--highlight-sky);">AI personalization</a>, and <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/Reputation%20management/uagc-comprehensive-reputation-analysis.html" target="_blank" class="fw-bold text-decoration-none" style="color: var(--arizona-red);">brand trust initiatives</a>.
-                                    <br><small class="text-muted mt-2 d-block"><em>*Lead = Request for Information (RFI) form submission with valid contact details and program selection (GA4 event: request_information_submit)</em></small>
-                                </p>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="executive-kpi-modern">
+                            <i class="bi bi-speedometer2 kpi-icon-modern" style="color: var(--highlight-orange);"></i>
+                            <div class="kpi-value-modern" style="color: var(--highlight-orange);">-14%</div>
+                            <div class="kpi-label-modern">Journey Time</div>
+                            <div class="kpi-context-modern">Faster user experience</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="executive-kpi-modern">
+                            <i class="bi bi-trophy kpi-icon-modern" style="color: var(--highlight-sky);"></i>
+                            <div class="kpi-value-modern" style="color: var(--highlight-sky);">62%</div>
+                            <div class="kpi-label-modern">Success Rate</div>
+                            <div class="kpi-context-modern">36 of 58 pages improved</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Clean Summary -->
+            <div class="row pt-4">
+                <div class="col-12">
+                    <div class="hero-summary-bottom">
+                        <div class="text-center">
+                            <h6 class="mb-2 text-primary">
+                                <i class="bi bi-clipboard-data me-2"></i>Executive Summary
+                            </h6>
+                            <p class="mb-2">
+                                Q4 FY26 RFI optimization strategy delivered <strong class="text-success">27.7% lead generation growth</strong> 
+                                while improving user experience efficiency.
+                            </p>
+                            <div class="small text-muted">
+                                <em>Lead = RFI form submission with valid contact details (GA4 event: request_information_submit)</em>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Spacer to push animations to the bottom -->
+        <div class="flex-grow-1"></div>
     </div>
 </section>
 
@@ -1127,18 +2910,18 @@ footer {
                                 <div class="col-md-6">
                                     <div class="row g-2">
                                         <div class="col-md-4">
-                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/seo-cro-audit-uagc.html" target="_blank" class="btn btn-sm w-100" style="background-color: var(--arizona-blue); border-color: var(--arizona-blue); color: white;">
-                                                <i class="bi bi-search me-1"></i>SEO Recovery
+                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/seo-cro-audit-uagc.html" target="_blank" class="btn btn-sm w-100" style="background-color: #0C234B; border-color: #0C234B; color: #ffffff !important; text-decoration: none;">
+                                                <i class="bi bi-search me-1" style="color: #ffffff;"></i>SEO Recovery
                                             </a>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/cookie/UAGC-cookie-personalization.html" target="_blank" class="btn btn-sm w-100" style="background-color: var(--highlight-sky); border-color: var(--highlight-sky); color: white;">
-                                                <i class="bi bi-robot me-1"></i>AI Strategy
+                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/cookie/UAGC-cookie-personalization.html" target="_blank" class="btn btn-sm w-100" style="background-color: #81D3EB; border-color: #81D3EB; color: #0C234B !important; text-decoration: none;">
+                                                <i class="bi bi-robot me-1" style="color: #0C234B;"></i>AI Strategy
                                             </a>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/Reputation%20management/uagc-comprehensive-reputation-analysis.html" target="_blank" class="btn btn-sm w-100" style="background-color: var(--arizona-red); border-color: var(--arizona-red); color: white;">
-                                                <i class="bi bi-shield-check me-1"></i>Reputation
+                                            <a href="https://omac049.github.io/UAGC-Strategic-Intelligence/Reputation%20management/uagc-comprehensive-reputation-analysis.html" target="_blank" class="btn btn-sm w-100" style="background-color: #AB0520; border-color: #AB0520; color: #ffffff !important; text-decoration: none;">
+                                                <i class="bi bi-shield-check me-1" style="color: #ffffff;"></i>Reputation
                                             </a>
                                         </div>
                                     </div>
@@ -2106,10 +3889,133 @@ function setupProgressBars() {
     progressBars.forEach(bar => observer.observe(bar));
 }
 
+// Floating Condensed Navigation Functionality
+function setupFloatingNavigation() {
+    const nav = document.getElementById('qbrNav');
+    const hamburger = document.getElementById('navHamburger');
+    const navContent = document.getElementById('navContent');
+    let isExpanded = false;
+    let expandTimeout;
+    let collapseTimeout;
+    
+    // Toggle functionality
+    function toggleNavigation() {
+        if (isExpanded) {
+            // Condense navigation
+            nav.classList.remove('expanded');
+            nav.classList.add('condensed');
+            isExpanded = false;
+            
+            // Accessibility
+            nav.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('title', 'Expand Navigation');
+        } else {
+            // Expand navigation
+            nav.classList.remove('condensed');
+            nav.classList.add('expanded');
+            isExpanded = true;
+            
+            // Accessibility
+            nav.setAttribute('aria-expanded', 'true');
+            hamburger.setAttribute('title', 'Collapse Navigation');
+        }
+    }
+    
+    // Click to toggle
+    hamburger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleNavigation();
+    });
+    
+    // Hover to expand (desktop only)
+    nav.addEventListener('mouseenter', function() {
+        if (window.innerWidth > 768 && !isExpanded) {
+            clearTimeout(collapseTimeout);
+            expandTimeout = setTimeout(() => {
+                if (!isExpanded) {
+                    toggleNavigation();
+                }
+            }, 300); // Slight delay to prevent accidental triggers
+        }
+    });
+    
+    // Mouse leave to collapse (desktop only)
+    nav.addEventListener('mouseleave', function() {
+        if (window.innerWidth > 768 && isExpanded) {
+            clearTimeout(expandTimeout);
+            collapseTimeout = setTimeout(() => {
+                if (isExpanded) {
+                    toggleNavigation();
+                }
+            }, 500); // Delay to allow navigation
+        }
+    });
+    
+    // Click outside to collapse
+    document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && isExpanded) {
+            toggleNavigation();
+        }
+    });
+    
+    // Auto-collapse when clicking nav links
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Auto-collapse after navigation with delay
+            setTimeout(() => {
+                if (isExpanded) {
+                    toggleNavigation();
+                }
+            }, 800); // Delay to allow smooth scroll to complete
+        });
+    });
+    
+    // Keyboard accessibility
+    hamburger.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleNavigation();
+        }
+    });
+    
+    // Handle escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isExpanded) {
+            toggleNavigation();
+        }
+    });
+    
+    // Responsive behavior
+    function handleResize() {
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile && isExpanded) {
+            // Clear any hover timeouts on mobile
+            clearTimeout(expandTimeout);
+            clearTimeout(collapseTimeout);
+        }
+    }
+    
+    // Listen for window resize
+    window.addEventListener('resize', handleResize);
+    
+    // Set initial ARIA state
+    nav.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('title', 'Expand Navigation');
+    hamburger.setAttribute('role', 'button');
+    hamburger.setAttribute('tabindex', '0');
+    
+    // Initial state
+    nav.classList.add('condensed');
+    isExpanded = false;
+}
+
 // Navigation Active State
 function setupNavigation() {
     const sections = document.querySelectorAll('.qbr-slide, #executive-overview');
-    const navLinks = document.querySelectorAll('.qbr-nav a');
+    const navLinks = document.querySelectorAll('.qbr-nav .nav-content a');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -2139,6 +4045,34 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.impact-card, .strategic-win, .challenge-item, .action-item').forEach(el => {
     observer.observe(el);
+});
+
+// Initialize all functionality when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Initializing UAGC QBR Navigation...');
+    
+    try {
+        // Initialize floating condensed navigation
+        setupFloatingNavigation();
+        console.log('✅ Floating condensed navigation initialized');
+        
+        // Initialize navigation active states
+        setupNavigation();
+        console.log('✅ Navigation active states initialized');
+        
+        // Initialize smooth scrolling
+        setupSmoothScrolling();
+        console.log('✅ Smooth scrolling initialized');
+        
+        // Initialize progress bars
+        setupProgressBars();
+        console.log('✅ Progress bars initialized');
+        
+        console.log('🎉 All navigation features loaded successfully!');
+        
+    } catch (error) {
+        console.error('❌ Error initializing navigation:', error);
+    }
 });
 </script>
 </body>

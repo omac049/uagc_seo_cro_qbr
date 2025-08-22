@@ -39,9 +39,15 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background: #003366;
+    background: linear-gradient(135deg, #003366 0%, #004080 25%, #0066cc 50%, #004080 75%, #003366 100%);
     position: relative;
     overflow: hidden;
+    animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background: linear-gradient(135deg, #003366 0%, #004080 25%, #0066cc 50%, #004080 75%, #003366 100%); }
+    50% { background: linear-gradient(135deg, #002244 0%, #003366 25%, #004080 50%, #003366 75%, #002244 100%); }
 }
 
 .hero-section::before {
@@ -52,9 +58,34 @@ body {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 50% 10%, rgba(0, 102, 204, 0.3) 0%, transparent 40%),
+        linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
     z-index: 1;
+    animation: floatingOrbs 6s ease-in-out infinite;
+}
+
+@keyframes floatingOrbs {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 255, 255, 0.03) 15deg, transparent 30deg);
+    animation: rotatePattern 20s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotatePattern {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .hero-content {
@@ -62,17 +93,84 @@ body {
     z-index: 2;
 }
 
+.hero-content h1 {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(0, 102, 204, 0.3);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    0% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(0, 102, 204, 0.3); }
+    100% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(0, 102, 204, 0.5); }
+}
+
+.hero-nav .nav-link {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-nav .nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.hero-nav .nav-link:hover::before {
+    left: 100%;
+}
+
+.hero-nav .nav-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 .kpi-card {
     background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    animation: cardPulse 4s ease-in-out infinite;
+}
+
+@keyframes cardPulse {
+    0%, 100% { box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2), 0 0 20px rgba(0, 102, 204, 0.3); }
+}
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+    z-index: 0;
+}
+
+.kpi-card:hover::before {
+    left: 100%;
 }
 
 .kpi-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important;
-    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25) !important;
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.kpi-card > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* Content Sections */
@@ -317,31 +415,28 @@ body {
                 <h2><i class="bi bi-clipboard-data"></i>Executive Summary</h2>
             </div>
             <div class="p-4">
-                <div class="alert alert-info alert-enhanced mb-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-info-circle-fill fs-3 me-3"></i>
-                        <h4 class="mb-0">Report Overview</h4>
+                <div class="alert alert-info alert-enhanced mb-3" style="padding: 1rem 1.5rem;">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-info-circle-fill fs-5 me-2"></i>
+                        <h5 class="mb-0">Report Overview</h5>
                     </div>
-                    <p class="mb-3">This report evaluates the impact of <strong>Request For Information (RFI) optimizations</strong> implemented on <strong>June 12, 2025</strong> across 58 key program pages. The analysis compares performance between the post‑change period (<em>June 12 – July 31, 2025</em>) and the pre‑change baseline (<em>April 24 – June 12, 2025</em>) using <strong>Google Analytics 4 (GA4)</strong> data.</p>
+                    <p class="mb-2 small">This report evaluates <strong>RFI optimizations</strong> implemented on <strong>June 12, 2025</strong> across 58 key program pages, comparing post-change performance (<em>June 12 – July 31</em>) to pre-change baseline (<em>April 24 – June 12</em>).</p>
                     
-                    <div class="row g-3">
+                    <div class="row g-2">
                         <div class="col-md-6">
-                            <h6 class="text-primary mb-2"><i class="bi bi-gear-fill me-2"></i>Key Implementation Areas</h6>
-                            <ul class="list-unstyled small mb-0">
-                                <li class="mb-1">• <strong>Program Page RFI Enhancement:</strong> Automatic program pre-selection on visited pages</li>
-                                <li class="mb-1">• <strong>Progress Indicators:</strong> Enhanced "Next" button with step indication (e.g., "Next | Step 1 of 2")</li>
-                                <li class="mb-1">• <strong>Post-RFI Experience:</strong> Improved thank you page with prefilled application links</li>
-                                <li class="mb-0">• <strong>Technical Improvements:</strong> Form data cleanup and enhanced tracking parameters</li>
+                            <h6 class="text-primary mb-1 small"><i class="bi bi-gear-fill me-1"></i>Key Implementations</h6>
+                            <ul class="list-unstyled small mb-0" style="font-size: 0.8rem;">
+                                <li>• Program pre-selection enhancement</li>
+                                <li>• Progress indicators on "Next" buttons</li>
+                                <li>• Improved post-RFI experience</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <h6 class="text-success mb-2"><i class="bi bi-trophy-fill me-2"></i>Standout Program Results</h6>
-                            <ul class="list-unstyled small mb-0">
-                                <li class="mb-1">• <strong>Health Information Management:</strong> <span class="text-success">+634% increase</span> (0.33% → 2.42%)</li>
-                                <li class="mb-1">• <strong>Child Development (Bachelor's):</strong> <span class="text-success">+287% increase</span> (1.61% → 6.25%)</li>
-                                <li class="mb-1">• <strong>Education Studies & Marketing:</strong> <span class="text-success">Nearly tripled</span> conversion rates</li>
-                                <li class="mb-1">• <strong>Health & Human Services:</strong> <span class="text-success">More than doubled</span> efficiency</li>
-                                <li class="mb-0 text-muted fst-italic">→ All top performers are bachelor's programs, indicating pre-selection is especially powerful at that level</li>
+                            <h6 class="text-success mb-1 small"><i class="bi bi-trophy-fill me-1"></i>Top Results</h6>
+                            <ul class="list-unstyled small mb-0" style="font-size: 0.8rem;">
+                                <li>• <strong>Health Info Management:</strong> <span class="text-success">+634%</span></li>
+                                <li>• <strong>Child Development:</strong> <span class="text-success">+287%</span></li>
+                                <li>• <strong>Education Studies:</strong> <span class="text-success">Nearly tripled</span></li>
                             </ul>
                         </div>
                     </div>
