@@ -155,6 +155,7 @@ body {
         url('./bg-image.png') center center;
     background-size: cover;
     background-attachment: fixed;
+    background-position: center center; /* Focus on center focal point */
     color: white;
     min-height: 100vh;
     display: flex;
@@ -176,7 +177,189 @@ Z-Index Hierarchy for Hero Section:
 - Text elements: 125-135
 */
 
-/* Remove any animation from hero to keep background stable */
+/* Two-Column Hero Layout Styles */
+
+/* Center Logo - Focal Point */
+.hero-center-logo {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    z-index: 110;
+    position: relative;
+}
+
+.uagc-logo-center {
+    display: inline-block;
+}
+
+.hero-logo-large {
+    max-height: 160px;
+    width: auto;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.hero-logo-large:hover {
+    transform: scale(1.05);
+}
+
+.hero-divider-center {
+    width: 160px;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--arizona-blue), 
+        var(--highlight-orange), 
+        var(--arizona-red)
+    );
+    border-radius: 2px;
+    animation: dividerGlow 4s ease-in-out infinite;
+}
+
+/* Left Column Content */
+.hero-left-content {
+    padding: 1.5rem;
+    z-index: 120;
+    position: relative;
+}
+
+.hero-main-metric-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-main-metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Right Column Content */
+.hero-right-content {
+    padding: 1.5rem;
+    z-index: 120;
+    position: relative;
+}
+
+.executive-kpi-compact {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.executive-kpi-compact:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(8px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced Typography for Two-Column Layout */
+.hero-left-content h1 {
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    animation: titleFadeIn 1.2s ease-out 0.3s both;
+}
+
+.hero-left-content h2 {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    animation: titleFadeIn 1.4s ease-out 0.5s both;
+}
+
+.hero-main-metric-card {
+    animation: heroHighlightPulse 2s ease-in-out 0.8s both;
+}
+
+.executive-kpi-compact:nth-child(1) {
+    animation: slideInRight 0.8s ease-out 1s both;
+}
+
+.executive-kpi-compact:nth-child(2) {
+    animation: slideInRight 0.8s ease-out 1.2s both;
+}
+
+.executive-kpi-compact:nth-child(3) {
+    animation: slideInRight 0.8s ease-out 1.4s both;
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Responsive Design for Two-Column Layout */
+@media (max-width: 991px) {
+    .hero-logo-large {
+        max-height: 140px;
+    }
+    
+    .hero-left-content, .hero-right-content {
+        padding: 1rem;
+        text-align: center;
+    }
+    
+    .hero-left-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-main-metric-card {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .executive-kpi-compact {
+        margin-bottom: 1rem;
+        justify-content: center;
+    }
+    
+    .executive-kpi-compact .d-flex {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-center-logo {
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-logo-large {
+        max-height: 120px;
+    }
+    
+    .hero-divider-center {
+        width: 120px;
+    }
+    
+    .hero-left-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-left-content h2 {
+        font-size: 1rem;
+    }
+    
+    .hero-main-metric-card .display-2 {
+        font-size: 3rem;
+    }
+    
+    .hero-left-content, .hero-right-content {
+        padding: 0.75rem;
+    }
+    
+    .executive-kpi-compact {
+        padding: 0.75rem 1rem;
+    }
+    
+    .executive-hero {
+        background-attachment: scroll; /* Better mobile performance */
+    }
+}
 
 @keyframes backgroundShift {
     0%, 100% { 
@@ -2055,7 +2238,11 @@ footer {
     }
     
     .executive-hero {
-        background-position: center 35%;
+        background-position: center center; /* Maintain center focal point */
+    }
+    
+    .hero-logo-large {
+        max-height: 130px;
     }
 }
 
@@ -2073,7 +2260,7 @@ footer {
     }
     
     .executive-hero {
-        background-position: center 30%;
+        background-position: center center; /* Maintain center focal point */
     }
 }
 
@@ -2084,7 +2271,7 @@ footer {
     }
     
     .executive-hero {
-        background-position: center 25%;
+        background-position: center center; /* Maintain center focal point */
     }
     
     .qbr-slide {
@@ -2193,7 +2380,7 @@ footer {
     }
     
     .executive-hero {
-        background-position: center 20%;
+        background-position: center center; /* Maintain center focal point */
     }
     
     .hero-content-container {
@@ -2313,7 +2500,7 @@ footer {
     }
     
     .executive-hero {
-        background-position: center 45%;
+        background-position: center center; /* Maintain center focal point */
     }
 }
 </style>
@@ -2367,64 +2554,87 @@ footer {
     <div class="particles"></div>
     
     <div class="container-fluid h-100">
-        <!-- Modern Clean Hero Layout -->
+        <!-- Two-Column Hero Layout -->
         <div class="hero-content-container">
-            <!-- Hero Title Section -->
-            <div class="hero-title-section">
-                <div class="uagc-logo mb-3">
-                    <img src="logo-white.png" alt="University of Arizona Global Campus" />
+            <!-- Center Logo - Focal Point -->
+            <div class="hero-center-logo">
+                <div class="uagc-logo-center mb-4">
+                    <img src="logo-white.png" alt="University of Arizona Global Campus" class="hero-logo-large" />
                 </div>
-                <div class="hero-divider mx-auto mb-3"></div>
-                <h1 class="display-4 fw-bold mb-2 text-shadow-strong text-white">
-                    Q4 FY26 <span class="text-warning">Quarterly Business Review</span>
-                </h1>
-                <h2 class="h4 mb-0 opacity-95 text-shadow text-white">
-                    RFI Conversion Strategy Full Impact Results
-                </h2>
+                <div class="hero-divider-center mx-auto mb-4"></div>
             </div>
             
-            <!-- Main Metric Showcase -->
-            <div class="hero-main-metric">
-                <div class="d-flex align-items-center justify-content-center mb-3">
-                    <i class="bi bi-graph-up-arrow text-success me-4" style="font-size: 3rem;"></i>
-                    <div class="text-center">
-                        <div class="display-3 fw-bold text-success mb-1">+27.7%</div>
-                        <div class="h5 text-muted fw-semibold mb-0">Lead Generation Growth</div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <div class="h6 text-primary mb-2">516 → 659 monthly RFI submissions</div>
-                    <p class="mb-0 text-muted">
-                        Strategic optimization initiatives delivered measurable growth in student lead generation and conversion efficiency
-                    </p>
-                </div>
-            </div>
-            
-            <!-- Supporting KPIs Grid -->
-            <div class="hero-kpi-showcase">
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="executive-kpi-modern">
-                            <i class="bi bi-target kpi-icon-modern" style="color: var(--arizona-blue);"></i>
-                            <div class="kpi-value-modern" style="color: var(--arizona-blue);">1.94%</div>
-                            <div class="kpi-label-modern">Conversion Rate</div>
-                            <div class="kpi-context-modern">+0.32 percentage points</div>
+            <!-- Two Column Layout -->
+            <div class="row align-items-center g-5">
+                <!-- Left Column: Title and Main Metric -->
+                <div class="col-lg-6">
+                    <div class="hero-left-content">
+                        <h1 class="display-3 fw-bold mb-3 text-shadow-strong text-white">
+                            Q4 FY25 <span class="text-warning">QBR</span>
+                        </h1>
+                        <h2 class="h5 mb-4 opacity-95 text-shadow text-white">
+                            RFI Conversion Strategy Results
+                        </h2>
+                        
+                        <!-- Main Metric Highlight -->
+                        <div class="hero-main-metric-card">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-graph-up-arrow text-success me-3" style="font-size: 2.5rem;"></i>
+                                <div>
+                                    <div class="display-2 fw-bold text-success mb-1">+27.7%</div>
+                                    <div class="h6 text-white fw-semibold mb-0">Lead Generation Growth</div>
+                                </div>
+                            </div>
+                            <div class="hero-metric-details">
+                                <div class="h6 text-warning mb-2">516 → 659 monthly RFI submissions</div>
+                                <p class="mb-0 text-white opacity-90 small">
+                                    Strategic optimization delivered measurable growth in student lead generation
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="executive-kpi-modern">
-                            <i class="bi bi-speedometer2 kpi-icon-modern" style="color: var(--highlight-orange);"></i>
-                            <div class="kpi-value-modern" style="color: var(--highlight-orange);">-14%</div>
-                            <div class="kpi-label-modern">Journey Time</div>
-                            <div class="kpi-context-modern">Faster user experience</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="executive-kpi-modern">
-                            <i class="bi bi-trophy kpi-icon-modern" style="color: var(--highlight-sky);"></i>
-                            <div class="kpi-value-modern" style="color: var(--highlight-sky);">62%</div>
-                            <div class="kpi-label-modern">Success Rate</div>
-                            <div class="kpi-context-modern">36 of 58 pages improved</div>
+                </div>
+                
+                <!-- Right Column: Supporting KPIs -->
+                <div class="col-lg-6">
+                    <div class="hero-right-content">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="executive-kpi-compact">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-target text-primary me-3" style="font-size: 1.8rem;"></i>
+                                        <div class="flex-grow-1">
+                                            <div class="h4 fw-bold text-primary mb-0">1.94%</div>
+                                            <div class="small text-dark fw-semibold">Conversion Rate</div>
+                                            <div class="small text-warning">+0.32 percentage points</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="executive-kpi-compact">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-speedometer2 text-warning me-3" style="font-size: 1.8rem;"></i>
+                                        <div class="flex-grow-1">
+                                            <div class="h4 fw-bold text-warning mb-0">-14%</div>
+                                            <div class="small text-dark fw-semibold">Journey Time</div>
+                                            <div class="small text-success">Faster user experience</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="executive-kpi-compact">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-trophy text-info me-3" style="font-size: 1.8rem;"></i>
+                                        <div class="flex-grow-1">
+                                            <div class="h4 fw-bold text-info mb-0">62%</div>
+                                            <div class="small text-dark fw-semibold">Success Rate</div>
+                                            <div class="small text-success">36 of 58 pages improved</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3577,13 +3787,12 @@ footer {
     <div class="container text-center">
         <div class="row">
             <div class="col-md-6">
-                <h6>UAGC Q4 FY26 Quarterly Business Review</h6>
+                <h6>UAGC Q4 FY25 Quarterly Business Review</h6>
                 <p class="mb-0 small">RFI Conversion Strategy Full Impact Results</p>
             </div>
             <div class="col-md-6">
                 <p class="mb-0 small">
-                    Generated: <time datetime="2025-08-06">August 6, 2025</time><br>
-                    Next Review: Q1 FY27
+                    Generated: <time datetime="2025-08-22">August 22, 2025</time><br>
                 </p>
             </div>
         </div>
