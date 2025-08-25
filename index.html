@@ -1258,6 +1258,36 @@ Z-Index Hierarchy for Hero Section:
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
+/* Center all KPI cards (Conversion Rate, Journey Time, Success Rate) and make them half width */
+.hero-right-content .row.g-3 .col-12:nth-child(1),
+.hero-right-content .row.g-3 .col-12:nth-child(2),
+.hero-right-content .row.g-3 .col-12:nth-child(3) {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.hero-right-content .row.g-3 .col-12:nth-child(1) .executive-kpi-compact,
+.hero-right-content .row.g-3 .col-12:nth-child(2) .executive-kpi-compact,
+.hero-right-content .row.g-3 .col-12:nth-child(3) .executive-kpi-compact {
+    width: 50% !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+}
+
+/* Center Lead Generation Growth card and make it half width */
+.hero-left-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.hero-left-content .hero-main-metric-card {
+    width: 50% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+}
+
 /* Modern Clean Hero Layout - Top Layer */
 .hero-content-container {
     position: relative;
